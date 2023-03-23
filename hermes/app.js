@@ -5,7 +5,9 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
-let db = new sqlite3.Database('./db/logs.db', sqlite3.OPEN_READONLY, (err) => {
+var sql_query = `SELECT * FROM ? order by id desc limit ?;`
+
+let db = new sqlite3.Database('./db/journaux_simules.db', sqlite3.OPEN_READONLY, (err) => {
   if (err) {
     console.error(err.message);
   }
@@ -16,13 +18,14 @@ app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname, "/public/html/index.html"));
 });
 
-app.get("/data", function(req, res) {
-	db.all("SELECT * FROM journal_fixation", [], function(err, rows) {
-		if (err) {
-			throw err;
-		}
-		console.log(rows);}
-	);
+app.get("/donnees/:table/:qte", function(req, res) {
+	console.log(req.params);
+	// db.all(, [], function(err, rows) {
+	// 	if (err) {
+	// 		throw err;
+	// 	}
+	// 	console.log(rows);}
+	// );
 });
 
 app.use("/static", express.static("public"))
