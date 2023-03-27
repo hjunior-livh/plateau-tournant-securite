@@ -37,13 +37,13 @@ JOURNAUX
 -- DROP TABLE configuration;
 
 
-CREATE TABLE fixation_plateau (
+CREATE TABLE fixation_cube (
     id INTEGER PRIMARY KEY,
     fixe INTEGER,                                  
     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
 );
 
-CREATE TABLE presence_plateau (
+CREATE TABLE presence_cube (
     id INTEGER PRIMARY KEY,
     present INTEGER,
     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
@@ -51,7 +51,7 @@ CREATE TABLE presence_plateau (
 
 CREATE TABLE courant_moteur (
     id INTEGER PRIMARY KEY,
-    valeur INTEGER,
+    valeur REAL,
     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
 );
 
