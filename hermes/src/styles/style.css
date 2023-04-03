@@ -118,6 +118,10 @@
     font-size: 30px;
 }
 
+#engineCurrentGraph {
+    width: 100%;
+}
+
 footer {
     box-sizing: border-box;
     width: 50%;

@@ -39,7 +39,7 @@ function addRecord(table, attributes, values) {
         if (err) {
             console.error(err);
         }
-        console.log(`[+] ${table} ➜ ${attributes} = ${values}`);
+        console.log(`[+] ${table}: ${attributes} ➜ ${values}`);
     });
 }
 

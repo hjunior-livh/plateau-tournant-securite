@@ -4,8 +4,8 @@ const path = require("path");
 
 const app = express();
 const port = 3000;
+const sqlQuery = "SELECT * FROM ? ORDER BY id DESC LIMIT ?;"
 
-var sql_query = `SELECT * FROM ? order by id desc limit ?;`
 
 let db = new sqlite3.Database('./data/journaux_simules.db', sqlite3.OPEN_READONLY, (err) => {
   if (err) {
@@ -14,13 +14,15 @@ let db = new sqlite3.Database('./data/journaux_simules.db', sqlite3.OPEN_READONL
   console.log('Connected to the database.');
 });
 
+
 app.get("/", function(req, res) {
-	res.sendFile(path.join(__dirname, "/public/html/index.html"));
+	res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 
-app.get("/data/:table/:quantity", function(req, res) {
-	console.log(`API request params. : ${req.params}`);
-	db.all(`SELECT * FROM ${req.params.table} order by id desc limit ${req.params.quantity};`, [], function(err, rows) {
+app.get("/data/:table/:limit", function(req, res) {
+	console.log("API request params. :");
+	console.dir(req.params);
+	db.all(`SELECT * FROM ${req.params.table} ORDER BY id DESC LIMIT ${req.params.limit};`, [], function(err, rows) {
 		if (err) {
 			throw err;
 		}
@@ -28,8 +30,10 @@ app.get("/data/:table/:quantity", function(req, res) {
 	});
 });
 
-app.use("/static", express.static("public"))
+
+app.use("/", express.static("build"));
+
 
 app.listen(port, () => {
-	console.log(`Hermes launched: http://localhost:${port}!`);
+	console.log(`Hermes web server launched: http://localhost:${port} !`);
 });

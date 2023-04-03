@@ -3,3 +3,9 @@ node_modules/
 
 # Visual Studio Code settings
 .vscode/
+
+# Built version
+hermes/build/
+
+# Parcel's cache
+hermes/.parcel-cache/

@@ -10,11 +10,11 @@
         <title>Hermes</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/static/styles/style.css">
+        <link rel="stylesheet" href="./styles/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">        
+        <link rel="stylesheet" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -49,7 +49,7 @@
                 </div>
                 <div id="dataSection" class="pageSection">
                     <h2><i class="fa fa-database" aria-hidden="true"></i> Données du cube</h2>
-                    <div id=""></div>
+                    <canvas id="engineCurrentGraph"></canvas>
                 </div>
                 <div id="configurationSection" class="pageSection">
                     <h2><i class="fa fa-cog" aria-hidden="true"></i> Configuration</h2>
@@ -97,12 +97,12 @@
                     <h2><i class="fa fa-cog" aria-hidden="true"></i> Configuration</h2>
                 </div>
 
-                
-
+                <!-- <script src="/modules/chart.js/dist/chart.umd.js"></script> -->
 
             </div>
             <footer><small>&copy; Copyright 2023, HBW & Co.</small></footer> 
         </div>
-        <script src="/static/scripts/script.js" async defer></script>
+        
+        <script src="./scripts/script.js" type="module"></script>
     </body>
 </html>
