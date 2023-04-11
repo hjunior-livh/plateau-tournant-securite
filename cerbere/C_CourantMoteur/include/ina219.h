@@ -230,6 +230,14 @@ class INA219
     public:
         float __GAIN_VOLTS[4]   = {0.04, 0.08, 0.16, 0.32};
         int   __BUS_RANGE[2]    = {16, 32};
+
+    //  Variables privé BTS SNIR pour gérer les erreurs
+    private:
+        bool ErrI2COpen = false;
+        bool ErrI2CAcces = false;
+        bool ErrI2CWrite = false;
+        bool ErrConfRegister = false;
+        bool ErrAccesRegister = false;
 };
 
 #endif

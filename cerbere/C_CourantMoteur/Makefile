@@ -1,23 +1,21 @@
-CXX		  := g++
-CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb
+CC=g++
+FLAGS= -Wall
+DEFS = ./defs
+LIB = ./lib
+SRC = ./src
+INCLUDE	= ./include
+BIN = ./bin
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
-
-LIBRARIES	:=
-EXECUTABLE	:= main
+all: $(LIB)/ina219.o $(LIB)/C_CourantMoteur.o
+	@echo "Compilation programme principal"
+	$(CC) $(FLAGS) $/test.cpp $(LIB)/ina219.o $(LIB)/C_CourantMoteur.o
+	@echo "Compilation terminée"
 
 
-all: $(BIN)/$(EXECUTABLE)
+$(LIB)/ina219.o : $(SRC)/ina219.cc $(INCLUDE)/ina219.h
+	@echo "Compilation classe ina129"
+	$(CC) -c $(SRC)/ina219.cc -std=c++14 -o $@ $(FLAGS) -lpthread
 
-run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
-
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
-
-clean:
-	-rm $(BIN)/*
+$(LIB)/C_CourantMoteur.o : $(SRC)/C_courantMoteur.cpp $(INCLUDE)/C_courantMoteur.hpp
+	@echo "Compilation classe C_courantMoteur"
+	$(CC) -c $(SRC)/C_courantMoteur.cpp -std=c++14 -o $@ $(FLAGS) -lpthread

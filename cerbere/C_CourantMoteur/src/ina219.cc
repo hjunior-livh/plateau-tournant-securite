@@ -1,4 +1,4 @@
-#include "ina219.h"
+#include "../include/ina219.h"
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -105,7 +105,7 @@ INA219::determine_current_lsb(float max_expected_amps, float max_possible_amps)
 
 	float nearest = roundf(max_possible_amps * 1000.0) / 1000.0;
 	if (max_expected_amps > nearest) {
-		char buffer[65];
+		char buffer[1024];
 		sprintf(buffer, "Expected current %f A is greater than max possible current %f A", max_expected_amps, max_possible_amps);
 		perror(buffer);
 	}
