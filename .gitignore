@@ -9,3 +9,6 @@ hermes/build/
 
 # Parcel's cache
 hermes/.parcel-cache/
+
+# Hermes TODO list
+hermes/TODO.md
