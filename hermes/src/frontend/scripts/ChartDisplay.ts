@@ -24,7 +24,7 @@ export class ChartDisplay {
     render() {
         if (this.chart === undefined) {
             this.chart = new Chart(
-                <ChartItem> this.canvas,
+                <ChartItem>this.canvas,
                 {
                     type: "line",
                     data: {
@@ -43,7 +43,7 @@ export class ChartDisplay {
             this.chart.data.labels = this.data.map(row => `${row.horodatage.split(' ')[1]} (${row.id})`);
             this.chart.data.datasets.forEach((dataset) => dataset.data = this.data.map(row => row.valeur));
             this.chart.update();
-        }        
+        }
     }
 
     updateData() {
