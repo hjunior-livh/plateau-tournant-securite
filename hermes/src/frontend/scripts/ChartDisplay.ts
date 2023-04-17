@@ -1,6 +1,13 @@
 import Chart, { ChartItem } from "chart.js/auto"
 
 
+interface DataRowSchematic {
+    id?: number,
+    horodata?: string,
+}
+
+
+
 export class ChartDisplay {
 
     private canvasId: string;

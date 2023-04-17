@@ -1,33 +1,30 @@
 // Importation des modules nécessaires
 import express, { Request, Response } from 'express'
 import path from 'path'
-import { sendSSEMessage } from './SSEClient';
+import { StreamSubscriberPool } from './StreamSubscriberPool';
 import sqlite3 from 'sqlite3';
+import bodyParser from 'body-parser';
 
-// const sqlite3 = require("sqlite3").verbose();
 
 // Déclararation des variables 
-const bodyParser = require('body-parser'); //TODO : Tester si ces libs sont nécessaires
-const cors = require('cors'); // https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
-
 const app = express();
 const port = 3000;
+let streamSubscribers: StreamSubscriberPool = new StreamSubscriberPool();
 // const sqlQuery = "SELECT * FROM ? ORDER BY id DESC LIMIT ?;" // visiblement impossible d'utiliser cette méthode (avec une variable) somehow... :(
 
 // Connexion à la bdd SQLite
-let db = new sqlite3.Database('../data/journaux_simules.db', sqlite3.OPEN_READONLY, (err: Error | null) => {
+let db = new sqlite3.Database('./data/journaux_simules.db', sqlite3.OPEN_READONLY, (err: Error | null) => {
 	if (err) {
 		console.error(err.message);
 	}
 	console.log('Connected to the database.');
 });
 
+// Utilisation des middlewares
+app.use(bodyParser.json());                                    // 
+app.use(bodyParser.urlencoded({ extended: false }));           // 
+app.use("/", express.static("/build/public"));                         //
 
-app.use(cors());                                               // TODO : Tester si ces libs sont nécessaires
-app.use(bodyParser.json());                                    // TODO : Tester si ces libs sont nécessaires
-app.use(bodyParser.urlencoded({ extended: false }));           // TODO : Tester si ces libs sont nécessaires
-
-app.use("/", express.static("build"));
 
 // Racine du serveur
 app.get("/", function (req: Request, res: Response) {
@@ -53,17 +50,29 @@ app.get("/api/:table/:limit?/:reversed?", function (req: Request, res: Response)
 
 // Reception des données des capteurs
 // https://stackoverflow.com/questions/11625519/how-to-access-the-request-body-when-posting-using-node-js-and-express
-app.post("/api/:table/:data", function (req: Request, res: Response) {
+app.post("/api/:table/", function (req: Request, res: Response) {
 	console.log("API request params. :");
 	console.dir(req.params);
-	res.statusCode = 200;
-	res.send()
+	// sendEventToAll(streamSubscribers, "new_data", {"message": "hi!"});
+	// res.status(200).send()
 })
 
 // Flux SSE
 app.get("/stream", function (req: Request, res: Response) {
 	console.log("stream !")
-	sendSSEMessage(res,); // TODO
+	// sendSSEMessage(res, "test", { "message": "Hello there !" }); // TODO
+
+	const subscribersId = Date.now();
+	const newSubscribers = {
+	  id: subscribersId,
+	  res
+	};
+	streamSubscribers.push(newSubscribers)
+
+	req.on('close', () => {
+		console.log(`${subscribersId} Connection closed`);
+		streamSubscribers = streamSubscribers.filter((client: any) => client.id !== subscribersId);
+	});
 })
 
 
