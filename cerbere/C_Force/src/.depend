@@ -1,0 +1,11 @@
+i2c.o: i2c.cpp ../include/cppgpio/i2c.hpp
+buttons.o: buttons.cpp ../include/cppgpio/buttons.hpp \
+ ../include/cppgpio/gpio.hpp tools.hpp make_unique.hpp
+lcd.o: lcd.cpp ../include/cppgpio/lcd.hpp ../include/cppgpio/gpio.hpp \
+ ../include/cppgpio/i2c.hpp tools.hpp
+tools.o: tools.cpp tools.hpp make_unique.hpp
+gpio.o: gpio.cpp ../include/cppgpio/gpio.hpp tools.hpp make_unique.hpp
+output.o: output.cpp ../include/cppgpio/output.hpp \
+ ../include/cppgpio/gpio.hpp
+C_force.o: C_force.cpp ../include/cppgpio/i2c.hpp \
+ ../include/cppgpio/C_Force.hpp
