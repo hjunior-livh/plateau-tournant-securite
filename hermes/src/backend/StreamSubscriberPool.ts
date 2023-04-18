@@ -11,6 +11,7 @@ const headers = {
 interface Subscriber {
     id: number,
     res: Response
+    
 }
 
 
@@ -21,13 +22,20 @@ export class StreamSubscriberPool {
         this.subscribers = [];
     }
 
-    addSubscriber(responseObj: Response) : void {
+    addSubscriber(responseObj: Response) : Subscriber {
         const subscribersId = Date.now();
-        const newSubscribers = {
+        const newSubscriber = {
             id: subscribersId,
             res: responseObj
         };
-        this.subscribers.push(newSubscribers)
+        this.subscribers.push(newSubscriber)
+
+        newSubscriber.res.on('close', () => {
+            console.log(`${newSubscriber.id}: Connection closed`);
+            this.subscribers = this.subscribers.filter((client: Subscriber) => client.id !== subscribersId);
+        });
+
+        return newSubscriber;
     }
 
     sendEvent(eventType: string, data: Object) : void {
@@ -39,7 +47,7 @@ export class StreamSubscriberPool {
 
             const id = new Date().toISOString();
             let msg: string = `event:${eventType}\ndata:${JSON.stringify(data)}\nid:${id}\n\n`;
-            console.log(`Stream message : ${msg}`);
+            console.log(`Stream event : ${msg}`);
             subscriber.res.write(msg);
         }
     }
