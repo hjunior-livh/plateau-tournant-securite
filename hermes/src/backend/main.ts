@@ -14,6 +14,7 @@ let argTable: string;
 let argQuantity: number;
 let argReversed: boolean;
 
+
 // "Connexion" à la bdd SQLite
 const db = new sqlite3.Database('./data/journaux_simules.db', sqlite3.OPEN_READONLY, (err: Error | null) => {
 	if (err) {
@@ -22,19 +23,21 @@ const db = new sqlite3.Database('./data/journaux_simules.db', sqlite3.OPEN_READO
 	console.log('[i] Connected to the database.');
 });
 
+
 // Utilisation des middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: false })); 
+app.use(express.urlencoded({ extended: false }));
 app.use("/", express.static("./build/public"));
 
 
-// Racine du serveurlimit
+// Racine du serveur
 app.get("/", function (req: Request, res: Response) {
 	res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-// API (obtention des données)
-app.get("/api/:table/:quantity/:reversed?/", function (req: Request, res: Response) {
+
+// API: envoi des données au client
+app.get("/api/:table/:quantity/", function (req: Request, res: Response) {
 	console.log("[i] API request params. :");
 	console.dir(req.params);
 
@@ -61,16 +64,18 @@ app.get("/api/:table/:quantity/:reversed?/", function (req: Request, res: Respon
 	}
 });
 
-// API 
+
+// API: reception des données
 app.post("/api/:table/", function (req: Request, res: Response) {
 	console.log("API request params. :");
 	console.dir(req.params);
-	streamSubscribers.sendEvent("new_data", req.body)
+	streamSubscribers.sendEvent("new_data", req.body);
 })
+
 
 // Flux SSE
 app.get("/stream/", function (req: Request, res: Response) {
-	console.log("[+] New stream subscribers")
+	console.log("[+] New stream subscribers");
 	streamSubscribers.addSubscriber(res);
 })
 

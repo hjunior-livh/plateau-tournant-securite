@@ -1,42 +1,3 @@
-/* 
-JOURNAUX
-========================
-
-# "fixation_plateau" 
-# => Repertorie l'historique de l'état de fixation du cube
-    - id* (ENTIER) : identifiant unique
-    - fixe (ENTIER) :
-    - horodatage (DATE) : horodatage automatique de la saisie de la ligne
-
-# "presence plateau"
-# => Repertorie l'historique de la présence du cube
-    - id* (ENTIER) : identifiant unique
-    - present (ENTIER) : 
-    - horodatage (DATE) : horodatage automatique de la saisie de la ligne
-
-# "consignes"
-# => Repertorie les seuils
-    - clef* (TEXTE[32]) : 
-    - valeur (ENTIER) : 
-
-# "configuration"
-# => Repertorie les valeurs de configuration
-    - clef* (TEXTE[32]) :
-    - valeur (ENTIER) : 
-
-------------------------
-* : clef primaire  
-
-*/
-
--- DROP TABLE fixation_plateau;
--- DROP TABLE presence_plateau;
--- DROP TABLE courant_moteur;
--- DROP TABLE blocages_moteur;
--- DROP TABLE seuils;
--- DROP TABLE configuration;
-
-
 CREATE TABLE fixation_cube (
     id INTEGER PRIMARY KEY,
     fixe INTEGER,                                  
@@ -55,17 +16,17 @@ CREATE TABLE courant_moteur (
     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
 );
 
-CREATE TABLE blocages_moteur (
+CREATE TABLE blocage_moteur (
     id INTEGER PRIMARY KEY,
     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
 );
 
-CREATE TABLE seuils (
+CREATE TABLE seuil_capteur (
     clef VARCHAR(32) PRIMARY KEY,
     valeur INTEGER
 );
 
-CREATE TABLE configuration (
+CREATE TABLE paramètre_configuration (
     clef VARCHAR(32) PRIMARY KEY,
     valeur INTEGER
 );

@@ -1,13 +1,23 @@
 import { ChartDisplay } from "./ChartDisplay";
+import { ChartDescriptor, chartDescriptors } from "./ChartDescriptors";
 
 
-const currentRoutine = new ChartDisplay("engineCurrentGraph", "courant_moteur", 10);
-currentRoutine.updateData();
-currentRoutine.render();
+let chartList: ChartDisplay[] = [];
+
+for (let i=0; i < chartDescriptors.length; i++) {
+    const newChartDescriptor: ChartDescriptor = chartDescriptors[i];
+    const newChart = new ChartDisplay(
+        newChartDescriptor.HTMLElementId,
+        newChartDescriptor.dataTable,
+        newChartDescriptor.defaultDataQuantity
+    )
+    newChart.updateData();
+    chartList.push(newChart);
+}
 
 const eventStream = new EventSource("/stream/");
 
-// eventStream.addEventListener("test", (event) => {
-//     console.log(event);
-//     console.log(event.data);
-// })
+eventStream.addEventListener("new_data", (event) => {
+    console.log(event);
+    console.log(event.data);
+})

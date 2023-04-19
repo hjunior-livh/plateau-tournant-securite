@@ -22,7 +22,7 @@ export class StreamSubscriberPool {
         this.subscribers = [];
     }
 
-    addSubscriber(responseObj: Response) : Subscriber {
+    public addSubscriber(responseObj: Response) : Subscriber {
         const subscribersId = Date.now();
         const newSubscriber = {
             id: subscribersId,
@@ -38,7 +38,7 @@ export class StreamSubscriberPool {
         return newSubscriber;
     }
 
-    sendEvent(eventType: string, data: Object) : void {
+    public sendEvent(eventType: string, data: Object) : void {
         var subscriber: Subscriber;
         for (let i = 0; i < this.subscribers.length; i++) {
             subscriber = this.subscribers[i];

@@ -7,7 +7,7 @@
     "test": "parcel src/index.html --port 3000 --open",
     "build": "parcel build src/frontend/index.html --dist-dir build/public/ && tsc --p ./src/backend/tsconfig.json",
     "run": "node ./build/main.js",
-    "clear": "rm -rf build/*",
+    "clear": "rm build/*.js build/public/*",
     "reset": ""
   },
   "author": "Benjamin PLA, William HAMET & Hugo JUNIOR",

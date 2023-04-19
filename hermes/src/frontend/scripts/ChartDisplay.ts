@@ -9,7 +9,6 @@ interface DataRow {
 }
 
 
-
 export class ChartDisplay {
 
     private canvasId: string;
@@ -38,7 +37,7 @@ export class ChartDisplay {
         this.xhr = new XMLHttpRequest();
     }
 
-    async updateData() : Promise<void> {
+    public updateData() : void {
         this.xhr.open("GET", `/api/${this.dataTable}/${this.dataEntryNumber}/`);
         this.xhr.send();
         this.xhr.onload = () => {
@@ -47,6 +46,7 @@ export class ChartDisplay {
                     this.data = JSON.parse(this.xhr.responseText);
                     this.data.sort((a:any, b:any) => (a.id - b.id));
                     console.log(this.data);
+                    this.render();
                 } else {
                     //TODO
                 }
@@ -56,7 +56,7 @@ export class ChartDisplay {
         };
     }
 
-    render() : void {
+    private render() : void {
         console.log("render called!")
         if (this.chart === undefined) {
             this.chart = new Chart(

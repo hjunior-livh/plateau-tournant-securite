@@ -1,2 +1,3 @@
-Dialogue en SSE : https://www.codeheroes.fr/2020/06/02/communication-temps-reel-avec-server-sent-events-sse/
+Dialogue en SSE :               https://www.codeheroes.fr/2020/06/02/communication-temps-reel-avec-server-sent-events-sse/
 Parsing du body d'une requête : https://stackoverflow.com/questions/11625519/how-to-access-the-request-body-when-posting-using-node-js-and-express
+Logging :                       https://expressjs.com/en/resources/middleware/morgan.html
