@@ -1,11 +1,8 @@
-
-
-
 export interface CubeFixationEntry {
     id: number,
     fixe: boolean,
     horodatage: string
-} 
+}
 
 export interface CubePresenceEntry {
     id: number,
@@ -13,46 +10,27 @@ export interface CubePresenceEntry {
     horodatage: string
 }
 
-// CREATE TABLE courant_moteur (
-//     id INTEGER PRIMARY KEY,
-//     valeur REAL,
-//     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
-// );
-
 export interface EngineCurrentEntry {
     id: number,
     valeur: number,
     horodatage: string
 }
 
-// CREATE TABLE blocages_moteur (
-//     id INTEGER PRIMARY KEY,
-//     horodatage TIMESTAMP DEFAULT (datetime('now','localtime'))
-// );
-
 export interface EngineBlockingEntry {
     id: number,
-    fixe: boolean,
     horodatage: string
 }
-
-// CREATE TABLE seuils (
-//     clef VARCHAR(32) PRIMARY KEY,
-//     valeur INTEGER
-// );
 
 export interface ThresholdEntry {
-    id: number,
-    fixe: boolean,
-    horodatage: string
+    clef: string,
+    valeur: number
 }
 
-// CREATE TABLE configuration (
-//     clef VARCHAR(32) PRIMARY KEY,
-//     valeur INTEGER
-// );
-
-export interface Entry {
+export interface ConfigSettingEntry {
     clef: string,
-    valeur: number | string
+    valeur: string
+}
+
+export interface Dataset extends Array<CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry> {
+    [index: number]: CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry;
 }
