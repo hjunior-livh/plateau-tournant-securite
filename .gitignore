@@ -15,3 +15,6 @@ hermes/TODO.md
 
 # macOS Desktop Services Store files
 .DS_Store
+
+# Hermes' logs
+hermes/logs/*
