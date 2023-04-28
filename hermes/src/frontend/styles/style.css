@@ -81,47 +81,6 @@ body {
     margin: 0 0 20px 0;
 }
 
-#cubeStatusContainer {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-}
-
-#cubeStatusContainer>.cubeStatus {
-    width: 45%;
-    height: 100px;
-    margin: 0;
-    border: transparent;
-    border-radius: 10px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: #394960;
-}
-
-#cubeStatusContainer>.cubeStatus>.statusIndicator {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-#cubeStatusContainer>.cubeStatus:nth-child(1)>.statusIndicator {
-    background-color: greenyellow;
-    box-shadow: 0 0 20px greenyellow;
-}
-
-#cubeStatusContainer>.cubeStatus:nth-child(2)>.statusIndicator {
-    background-color: crimson;
-    box-shadow: 0 0 20px crimson;
-}
-
-#cubeStatusContainer>.cubeStatus>.statusTitle {
-    font-size: 30px;
-}
-
 #engineCurrentGraph {
     width: 100%;
 }

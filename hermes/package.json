@@ -1,21 +1,25 @@
 {
-  "name": "plateau-tournant-securite",
+  "name": "hermes",
   "version": "1.0.0",
   "description": "",
-  "source": "src/backend/main.ts",
   "scripts": {
-    "test": "parcel src/index.html --port 3000 --open",
-    "build": "parcel build src/frontend/index.html --dist-dir build/public/ && tsc --p ./src/backend/tsconfig.json",
-    "run": "node ./build/main.js",
-    "clear": "rm build/*.js build/public/*",
-    "reset": ""
+    "clear:build": "rm -rf build/*.js build/public/*",
+    "test:frontend": "parcel watch src/frontend/index.html --dist-dir build/public/",
+    "test:backend": "nodemon --watch src/backend --ext ts,json --exec \"npm run build:backend && node build/main.js\"",
+    "test": "npm run clear:build && concurrently \"npm run test:frontend\" \"npm run test:backend\"",
+    "build:frontend": "parcel build src/frontend/index.html --dist-dir build/public/",
+    "build:backend": "tsc --p src/backend/tsconfig.json",
+    "build": "npm run clear:build && npm run build:frontend && npm run build:backend",
+    "start": "node build/main.js"
   },
-  "author": "Benjamin PLA, William HAMET & Hugo JUNIOR",
-  "license": "ISC",
+  "author": "Hugo JUNIOR",
+  "license": "",
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",
     "@types/sqlite3": "^3.1.8",
+    "concurrently": "^6.3.0",
+    "nodemon": "^2.0.15",
     "parcel": "^2.6.2",
     "typescript": "^5.0.4"
   },

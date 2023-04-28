@@ -1,3 +1,1 @@
-curl -X POST https://localhost:3000/courant_moteur
-   -H 'Content-Type: application/json'
-   -d '{"e-mail":"my_mail","password":"my_password"}'
+curl -X POST http://localhost:3000/api/courant_moteur -H 'Content-Type: application/json' -d '{"valeur": "test-de-la-data-live!"}'

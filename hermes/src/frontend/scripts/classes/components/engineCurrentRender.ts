@@ -1,8 +1,8 @@
 import { Chart, ChartDataset } from "chart.js/auto"
-import { EngineCurrentEntry } from "./DataSchematics";
+import { EngineCurrentEntry } from "../../types/ChartDataTypes";
 
 
-function engineCurrentRender(): void {
+export function engineCurrentRender(): void {
     if (this.chart === undefined) {
         this.chart = new Chart(
             this.ctx,
@@ -29,20 +29,5 @@ function engineCurrentRender(): void {
             )
         );
         this.chart.update();
-    }
-}
-
-
-// function ...Render() : void {
-// ..
-
-export function getRenderMethod(chartId: string): Function {
-    switch (chartId) {
-        case "engine-current":
-            return engineCurrentRender;
-        // case "...":
-        // return ...
-        default:
-            throw new Error(`Invalid chartId "${chartId}": render not found`);
     }
 }

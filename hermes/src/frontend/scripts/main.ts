@@ -1,26 +1,25 @@
-import { ChartDisplay } from "./ChartDisplay";
-import { ChartDescriptor, chartDescriptors } from "./ChartDescriptors";
-import { getRenderMethod } from "./chartRenderGenerator";
+import { ChartDisplay } from "./classes/ChartDisplay";
+import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors";
+import { ChartFactory } from './classes/ChartFactory';
 
 
 let chartList: ChartDisplay[] = [];
 
-for (let i = 0; i < chartDescriptors.length; i++) {
-    const newChartDescriptor: ChartDescriptor = chartDescriptors[i];
-    const newChart = new ChartDisplay(
-        newChartDescriptor.HTMLElementId,
-        newChartDescriptor.dataTable,
-        newChartDescriptor.defaultDataQuantity
-    )
-    newChart.setRenderMethod(getRenderMethod(newChartDescriptor.chartId));
-    newChart.updateData();
-    chartList.push(newChart);
+async function main() {
+    const chartFactory:ChartFactory = new ChartFactory();
+    for (const newChartDescriptor of CHART_DESCRIPTORS) {
+        const newChart = chartFactory.produceChart(newChartDescriptor);
+        await newChart.updateData();
+        newChart.render();
+        chartList.push(newChart);
+    }
+
+    const eventStream = new EventSource("api/stream/");
+
+    eventStream.addEventListener("new_data", (event) => {
+        console.log(event);
+        console.log(event.data);
+    })
 }
 
-const eventStream = new EventSource("/stream/");
-
-eventStream.addEventListener("new_data", (event) => {
-    console.log(event);
-    console.log(event.data);
-
-})
+main();
