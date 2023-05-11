@@ -9,7 +9,7 @@ const streamSubscribers: StreamSubscriberPool = new StreamSubscriberPool();
 let argTable: string;
 let argQuantity: number;
 
-const db = new sqlite3.Database('./data/simulated_tray_and_cube_data.db', sqlite3.OPEN_READONLY, (err: Error | null) => {
+const db = new sqlite3.Database('./data/simulated_data.db', sqlite3.OPEN_READONLY, (err: Error | null) => {
 	if (err) {
 		throw err;
 	}
@@ -18,7 +18,7 @@ const db = new sqlite3.Database('./data/simulated_tray_and_cube_data.db', sqlite
 
 
 // API: send data to client
-apiRouter.get("/:table/:quantity/", (req: Request, res: Response) => {
+apiRouter.get("/get/:table/:quantity/", (req: Request, res: Response) => {
 	argTable = req.params.table;
 	argQuantity = parseInt(req.params.quantity, 10);
 	if (isNaN(argQuantity)) {
@@ -39,16 +39,16 @@ apiRouter.get("/:table/:quantity/", (req: Request, res: Response) => {
 
 
 // API: data reception
-apiRouter.post("/:table/", (req: Request, res: Response) => {
+apiRouter.post("/post/:table/", (req: Request, res: Response) => {
+	console.log(`[+] New data incoming: TABLE=${req.body.table}`)
 	streamSubscribers.sendEvent("new_data", req.body);
-})
+});
 
 
 // SSE stream
 apiRouter.get("/stream/", (req: Request, res: Response) => {
 	streamSubscribers.addSubscriber(res);
-})
+});
 
-//
+
 export { apiRouter }
-

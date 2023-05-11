@@ -4,22 +4,19 @@ import { ChartFactory } from './classes/ChartFactory';
 
 
 let chartList: ChartDisplay[] = [];
+const chartFactory: ChartFactory = new ChartFactory();
 
-async function main() {
-    const chartFactory:ChartFactory = new ChartFactory();
-    for (const newChartDescriptor of CHART_DESCRIPTORS) {
-        const newChart = chartFactory.produceChart(newChartDescriptor);
-        await newChart.updateData();
-        newChart.render();
-        chartList.push(newChart);
-    }
 
-    const eventStream = new EventSource("api/stream/");
-
-    eventStream.addEventListener("new_data", (event) => {
-        console.log(event);
-        console.log(event.data);
-    })
+for (const newChartDescriptor of CHART_DESCRIPTORS) {
+    const newChart = chartFactory.produceChart(newChartDescriptor);
+    newChart.fetchData();
+    chartList.push(newChart);
 }
 
-main();
+const eventStream = new EventSource("api/stream/");
+
+eventStream.addEventListener("new_data", (event) => {
+    for (let chart of chartList.filter((chart) => chart.dataTable === event.data.table)) {
+        chart.updateData(event.data);
+    }
+});

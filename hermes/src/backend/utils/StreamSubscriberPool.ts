@@ -3,7 +3,7 @@ import { Response } from 'express'
 // SSE stream subscriber
 type Subscriber = {
     id: number,
-    res: Response
+    res: Response,
 }
 
 // Response's headers for SSE event message

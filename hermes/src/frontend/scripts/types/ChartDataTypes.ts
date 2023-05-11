@@ -31,6 +31,6 @@ export type ConfigSettingEntry = {
     valeur: string
 }
 
-export type Dataset = Array<CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry> & {
-    [index: number]: CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry;
-}
+export type DataEntry = CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry;
+
+export type Dataset = Array<DataEntry>;

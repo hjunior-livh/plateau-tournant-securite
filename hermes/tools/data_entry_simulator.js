@@ -4,31 +4,20 @@ var table;
 var attributes;
 var values;
 
-let db = new sqlite3.Database("../data/journaux_simules.db", sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database("../data/simulated_data.db", sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
         console.error(err.message);
     }
     console.log("Connecté à la base de données");
 });
 
+
 function randInt(min, max) {
-    /**
-     * Retourne un nombre entier aléatoire entre `min` et `max`
-     * @param  {number} min - Valeur aléatoire minimum
-     * @param {number} max - Valeur aléatoire maximum
-     * @returns {number}
-     */
     return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
 
 function randFloat(min, max) {
-    /**
-     * Retourne un nombre floatant aléatoire entre `min` et `max`
-     * @param  {number} min - Valeur aléatoire minimum
-     * @param {number} max - Valeur aléatoire maximum
-     * @returns {number}
-     */
     return Math.random() * (max - min) + min;
 }
 
