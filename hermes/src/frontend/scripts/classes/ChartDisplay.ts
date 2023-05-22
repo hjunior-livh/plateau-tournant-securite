@@ -11,10 +11,9 @@ export class ChartDisplay {
     private defaultDataQuantity: number;
     private canvas: HTMLCanvasElement | null;
     private ctx: CanvasRenderingContext2D | null;
-    private data: Dataset[];
+    private data: Dataset;
     private chart: Chart;
     private xhr: XMLHttpRequest;
-    private updateDataStream: EventSource;
     public render: Function;
 
 
@@ -36,11 +35,6 @@ export class ChartDisplay {
         this.chart;
         this.xhr = new XMLHttpRequest();
         this.render = renderFunction;
-        this.updateDataStream = new EventSource(`api/stream/${dataTable}`);
-        this.updateDataStream.addEventListener("new_data", (event) => {
-            console.log(event);
-            console.log(event.data);
-        });
     }
 
 
@@ -60,7 +54,8 @@ export class ChartDisplay {
         });
     }
 
-    updateData(newData: any[]): void {
-        this.data.push(JSON.parse(newData) as DataEntry);
+    updateData(newData: DataEntry): void {
+        this.data.push(newData);
+        this.render();
     }
 }

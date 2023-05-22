@@ -33,4 +33,9 @@ export type ConfigSettingEntry = {
 
 export type DataEntry = CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry;
 
-export type Dataset = Array<DataEntry>;
+export type StreamMessage = {
+    table: string
+    entry: DataEntry
+}
+
+export type Dataset = DataEntry[];

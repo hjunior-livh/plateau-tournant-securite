@@ -40,8 +40,9 @@ apiRouter.get("/get/:table/:quantity/", (req: Request, res: Response) => {
 
 // API: data reception
 apiRouter.post("/post/:table/", (req: Request, res: Response) => {
-	console.log(`[+] New data incoming: TABLE=${req.body.table}`)
-	streamSubscribers.sendEvent("new_data", req.body);
+	console.log(`[+] New data incoming: TABLE=${req.params.table}`);
+	res.status(200).end();
+	streamSubscribers.sendEvent("new_data", req.params.table, req.body);
 });
 
 

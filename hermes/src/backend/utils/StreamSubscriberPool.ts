@@ -41,11 +41,14 @@ export class StreamSubscriberPool {
         return newSubscriber;
     }
 
-    public sendEvent(eventType: string, data: Object): void {
+    public sendEvent(eventType: string, dataTable: string, dataEntry: Object): void {
         for (const subscriber of this.subscribers) {
-            subscriber.res.writeHead(200, headers);
+            if (!subscriber.res.headersSent) {
+                subscriber.res.writeHead(200, headers);
+            }
             const id = new Date().toISOString();
-            let msg: string = `event:${eventType}\ndata:${JSON.stringify(data)}\nid:${id}\n\n`;
+            const message: unknown = {"table": dataTable, "entry": dataEntry};
+            let msg: string = `event:${eventType}\ndata:${JSON.stringify(message)}\nid:${id}\n\n`;
             subscriber.res.write(msg);
         }
     }
