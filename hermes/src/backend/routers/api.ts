@@ -26,7 +26,7 @@ apiRouter.get("/get/:table/:quantity/", (req: Request, res: Response) => {
 	}
 
 	if (SQLParamRegex.test(argTable)) { //TODO : limit n'est pas forcément définit donc f'faire gaffe 
-		db.all(`SELECT * FROM ${argTable} ORDER BY id DESC LIMIT ${argQuantity};`, [], (err: Error | null, rows: unknown[]) => { // /!\ éventuel injection SQL
+		db.all(`SELECT * FROM ${argTable} ORDER BY epoch DESC LIMIT ${argQuantity};`, [], (err: Error | null, rows: unknown[]) => { // /!\ éventuel injection SQL
 			if (err) {
 				throw err;
 			}

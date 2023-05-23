@@ -9,8 +9,7 @@ export function engineCurrentRender(): void {
             {
                 type: "line",
                 data: {
-                    labels: this.data.map((row: EngineCurrentEntry) =>
-                        `${row.horodatage.split(' ')[1]} (${row.id})`),
+                    labels: this.data.map((row: EngineCurrentEntry) => new Date(row.epoch).toLocaleString('fr-FR')),
                     datasets: [
                         {
                             data: this.data.map((row: EngineCurrentEntry) => row.valeur),
@@ -22,7 +21,7 @@ export function engineCurrentRender(): void {
             }
         );
     } else {
-        this.chart.data.labels = this.data.map((row: EngineCurrentEntry) => `${row.horodatage.split(' ')[1]} (${row.id})`);
+        this.chart.data.labels = this.data.map((row: EngineCurrentEntry) => new Date(row.epoch).toLocaleString('fr-FR'));
         this.chart.data.datasets.forEach((dataset: ChartDataset) =>
             dataset.data = this.data.map((row: EngineCurrentEntry) =>
                 row.valeur

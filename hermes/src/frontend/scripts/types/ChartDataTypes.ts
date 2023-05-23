@@ -1,24 +1,20 @@
 export type CubeFixationEntry = {
-    id: number,
-    fixe: boolean,
-    horodatage: string
+    epoch: number,
+    fixe: boolean
 }
 
 export type CubePresenceEntry = {
-    id: number,
-    present: boolean,
-    horodatage: string
+    epoch: number,
+    present: boolean
 }
 
 export type EngineCurrentEntry = {
-    id: number,
-    valeur: number,
-    horodatage: string
+    epoch: number,
+    valeur: number
 }
 
 export type EngineBlockingEntry = {
-    id: number,
-    horodatage: string
+    epoch: number
 }
 
 export type ThresholdEntry = {

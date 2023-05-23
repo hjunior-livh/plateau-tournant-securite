@@ -45,7 +45,7 @@ export class ChartDisplay {
             if (this.xhr.readyState === this.xhr.DONE) {
                 if (this.xhr.status === 200) {
                     this.data = JSON.parse(this.xhr.responseText);
-                    this.data.sort((a: any, b: any) => (a.id - b.id));
+                    this.data.sort((a: any, b: any) => (a.epoch - b.epoch)); //TODO : typing
                     this.render();
                 } else {
                     //TODO: message, erreur, 2n essai ?

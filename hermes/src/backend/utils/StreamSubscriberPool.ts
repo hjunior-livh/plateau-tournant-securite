@@ -1,5 +1,6 @@
 import { Response } from 'express'
 
+
 // SSE stream subscriber
 type Subscriber = {
     id: number,
@@ -11,9 +12,10 @@ const headers = {
     'Content-Type': 'text/event-stream',
     'Connection': 'keep-alive',
     'Cache-Control': 'no-cache'
-};
+}
 
 
+// Stream Subscriber Pool
 export class StreamSubscriberPool {
 
     private subscribers: Subscriber[];
