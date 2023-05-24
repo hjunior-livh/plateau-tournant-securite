@@ -1,5 +1,5 @@
 import { Chart } from "chart.js/auto"
-import { DataEntry, Dataset } from "../types/ChartDataTypes";
+import { EventDataEntry, EventDataset } from "../types/ChartDataTypes";
 import { ChartDescriptor } from "./ChartDescriptors";
 
 
@@ -11,7 +11,7 @@ export class ChartDisplay {
     private defaultDataQuantity: number;
     private canvas: HTMLCanvasElement | null;
     private ctx: CanvasRenderingContext2D | null;
-    private data: Dataset;
+    private data: EventDataset;
     private chart: Chart;
     private xhr: XMLHttpRequest;
     public render: Function;
@@ -45,7 +45,7 @@ export class ChartDisplay {
             if (this.xhr.readyState === this.xhr.DONE) {
                 if (this.xhr.status === 200) {
                     this.data = JSON.parse(this.xhr.responseText);
-                    this.data.sort((a: any, b: any) => (a.epoch - b.epoch)); //TODO : typing
+                    this.data.sort((a: EventDataEntry, b: EventDataEntry) => (a.epoch - b.epoch));
                     this.render();
                 } else {
                     //TODO: message, erreur, 2n essai ?
@@ -54,7 +54,7 @@ export class ChartDisplay {
         });
     }
 
-    updateData(newData: DataEntry): void {
+    updateData(newData: EventDataEntry): void {
         this.data.push(newData);
         this.render();
     }

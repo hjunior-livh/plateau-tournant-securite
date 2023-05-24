@@ -1,11 +1,13 @@
+import { type } from "os"
+
 export type CubeFixationEntry = {
     epoch: number,
-    fixe: boolean
+    fixe: number
 }
 
 export type CubePresenceEntry = {
     epoch: number,
-    present: boolean
+    present: number
 }
 
 export type EngineCurrentEntry = {
@@ -27,11 +29,21 @@ export type ConfigSettingEntry = {
     valeur: string
 }
 
-export type DataEntry = CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry;
+
+
+export type DataEntry = CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry
+
+export type EventDataEntry = Exclude<DataEntry, ThresholdEntry | ConfigSettingEntry>
+
+export type InfoDataEntry = Exclude<DataEntry, CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry>
 
 export type StreamMessage = {
     table: string
     entry: DataEntry
 }
 
-export type Dataset = DataEntry[];
+export type Dataset = DataEntry[]
+
+export type EventDataset = EventDataEntry[]
+
+export type InfoDataset = InfoDataEntry[]

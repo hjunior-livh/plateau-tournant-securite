@@ -14,7 +14,7 @@ export const CHART_DESCRIPTORS: ChartDescriptor[] = [
         chartId: "engine-current",
         HTMLElementId: "engineCurrentChart",
         dataTable: "courant_moteur",
-        defaultDataQuantity: 10
+        defaultDataQuantity: 1000
     }
     //...
 ];

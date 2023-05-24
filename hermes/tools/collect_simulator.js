@@ -23,6 +23,7 @@ function randFloat(min, max) {
 
 
 function addRecord(table, attributes, values) {
+    // console.log(`INSERT INTO ${table}(${attributes}) VALUES (${values});`);
     db.run(`INSERT INTO ${table}(${attributes}) VALUES (${values});`, [], (err) => {
         if (err) {
             console.error(err);
@@ -34,35 +35,35 @@ function addRecord(table, attributes, values) {
 
 setInterval(() => {
     // fixation plateau 
-    // if (randInt(0, 5) === 0) {
+    // if (randInt(0, 4) === 0) {
     //     table = "fixation_cube";
-    //     attributes = "fixe";
-    //     values = randInt(0, 1);
+    //     attributes = ["epoch", "fixe"];
+    //     values = [Date.now(), randInt(0, 1)];
     //     addRecord(table, attributes, values);
     // }
 
     //presence plateau
-    // if (randInt(0, 5) === 0) {
+    // if (randInt(0, 4) === 0) {
     //     table = "presence_cube";
-    //     attributes = "present";
-    //     values = randInt(0, 1);
+    //     attributes = ["epoch", "present"];
+    //     values = [Date.now(), randInt(0, 1)];
     //     addRecord(table, attributes, values);
     // }
 
 
     //courant moteur
-    if (randInt(0, 1) === 0) {
+    if (randInt(0, 5) === 0) {
         table = "courant_moteur";
         attributes = ["epoch", "valeur"];
-        values = [Math.floor(new Date().now()/1000), randInt(0, 100)];
+        values = [Date.now(), randInt(0, 100)];
         addRecord(table, attributes, values);
     }
 
     //blocages moteur
-    // if (randInt(0, 20) === 0) {
-    //     table = "blocages_moteur";
-    //     attributes = "";
-    //     values = "";
+    // if (randInt(0, 4) === 0) {
+    //     table = "blocage_moteur";
+    //     attributes = ["epoch"];
+    //     values = [Date.now()];
     //     addRecord(table, attributes, values);
     // }
 
@@ -82,4 +83,4 @@ setInterval(() => {
     //     addRecord(table, attributes, values);
     // }
 
-}, 1200)
+}, 10)
