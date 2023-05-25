@@ -1,32 +1,47 @@
 #include "../include/Cerbere.hpp"
 
-
 #include <iostream>
-
+#include <math.h>
 
 Cerbere::Cerbere(){
-    CMoteur = new C_courantMoteur();
-}
-
-void lancéSurveillance(){
-
-}
-
-void Cerbere::vérifierCourant(){
-    std::cout << "on lance la lecture" << std::endl;
-    CMoteur -> lire();
-    std::cout << "valeure relevé: ";
-    CMoteur -> getReleve();
-    std::cout << std::endl;
-}
-
-void vérifierPrésence(){
+    cMoteur = new C_courantMoteur();
+    consigne = new Consigne();
+    signal = new Signalement();
 
 }
-void vérifierFixation(){
+
+void lanceSurveillance(){
+
+}
+
+void Cerbere::verifierCourant(){
+    cMoteur -> lire();
+    float iMoteur = cMoteur -> getReleve();
+    iMoteur = roundf(iMoteur); 
+    if (iMoteur < 0){
+        iMoteur = iMoteur * -1;
+    } 
+    if (iMoteur > consigne -> getValMaxMot())
+    {
+        //Début de l'alerte
+        //std::cout << "DANGER ! Le motteur force trop. Intensité du moteu = " << iMoteur << " mA" << std::endl;
+        signal -> signalerProbleme(2);
+    }
+    if (iMoteur < consigne -> getValMinMot())
+    {   
+        //FIN de l'alerte
+        //std::cout << "re passage a la normal. Intensité du moteur = " << iMoteur << " mA" << std::endl;
+        signal -> signalerProbleme(1);
+    }
+}
+
+void verifierPresence(){
+
+}
+void verifierFixation(){
 
 }
 
 Cerbere::~Cerbere() {
-    delete CMoteur;
+    delete cMoteur;
 }
