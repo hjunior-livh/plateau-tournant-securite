@@ -1,5 +1,3 @@
-import { type } from "os"
-
 export type CubeFixationEntry = {
     epoch: number,
     fixe: number
@@ -30,19 +28,13 @@ export type ConfigSettingEntry = {
 }
 
 
-
 export type DataEntry = CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry | ThresholdEntry | ConfigSettingEntry
 
 export type EventDataEntry = Exclude<DataEntry, ThresholdEntry | ConfigSettingEntry>
 
 export type InfoDataEntry = Exclude<DataEntry, CubeFixationEntry | CubePresenceEntry | EngineCurrentEntry | EngineBlockingEntry>
 
-export type StreamMessage = {
-    table: string
-    entry: DataEntry
-}
-
-export type Dataset = DataEntry[]
+export type Dataset = Array<DataEntry>
 
 export type EventDataset = EventDataEntry[]
 

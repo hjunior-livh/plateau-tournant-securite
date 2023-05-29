@@ -6,9 +6,9 @@ Projet "Plateau tournant" (Sécurité) de Hugo JUNIOR, Benjamin PLA et William H
 
 ## Installation
 
-### C++ part
+### Cebere
 
-### NodeJS server
+### Hermes
 
 ## Configuration
 
