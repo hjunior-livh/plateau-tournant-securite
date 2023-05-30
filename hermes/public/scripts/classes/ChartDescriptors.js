@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CHART_DESCRIPTORS = void 0;
-exports.CHART_DESCRIPTORS = [
+export const CHART_DESCRIPTORS = [
     {
         chartId: "engine-current",
         HTMLElementId: "engineCurrentChart",

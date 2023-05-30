@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "clear-build": "rimraf -g ./build/\"**\"/*",
-    "test:frontend": "parcel watch src/frontend/index.html --dist-dir build/public/",
-    "test:backend": "nodemon --watch src/backend --ext ts,json --exec \"npm run build:backend && node build/main.js\"",
-    "test": "npm run clear:build && concurrently \"npm run test:frontend\" \"npm run test:backend\"",
-    "build:frontend": "parcel build src/frontend/index.html --dist-dir build/public/",
-    "build:backend": "tsc --p src/backend/tsconfig.json",
-    "build": "npm run clear:build && npm run build:frontend && npm run build:backend",
-    "start": "node build/main.js",
+    "clear": "rimraf -g ./public/\"**\"/*",
+    "build": "npm run clear &&  rsync -a --exclude='*.ts' ./src/frontend/ ./public/ && tsc",
+    "start": "ts-node ./src/backend/main.js",
     "test-cmd": "npm run clear-build && rsync -a --exclude='*.ts' ./src/ ./build/ && tsc --p ./tsconfig.json",
     "test-cmd2": "copyfiles src/public/**/* build/"
   },
@@ -30,6 +25,7 @@
     "copyfiles": "^2.4.1",
     "express": "^4.18.2",
     "rimraf": "^5.0.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "ts-node": "^10.9.1"
   }
 }

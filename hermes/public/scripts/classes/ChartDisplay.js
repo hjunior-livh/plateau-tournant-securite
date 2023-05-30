@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChartDisplay = void 0;
-const engineCurrentRenderer_1 = require("./components/engineCurrentRenderer");
-class ChartDisplay {
+import { engineCurrentRenderer } from "./components/engineCurrentRenderer";
+export class ChartDisplay {
     constructor(chartDescriptor) {
         let renderFunction;
         this.id = chartDescriptor.chartId;
@@ -21,7 +18,7 @@ class ChartDisplay {
         this.xhr = new XMLHttpRequest();
         switch (chartDescriptor.chartId) {
             case "engine-current":
-                renderFunction = engineCurrentRenderer_1.engineCurrentRenderer;
+                renderFunction = engineCurrentRenderer;
                 break;
             // case "...":
             //     module = ...
@@ -64,4 +61,3 @@ class ChartDisplay {
         this.render();
     }
 }
-exports.ChartDisplay = ChartDisplay;

@@ -1,10 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const ChartDisplay_1 = require("./classes/ChartDisplay");
-const ChartDescriptors_1 = require("./classes/ChartDescriptors");
+import { ChartDisplay } from "./classes/ChartDisplay";
+import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors";
 let chartList = [];
-for (const newChartDescriptor of ChartDescriptors_1.CHART_DESCRIPTORS) {
-    const newChart = new ChartDisplay_1.ChartDisplay(newChartDescriptor);
+for (const newChartDescriptor of CHART_DESCRIPTORS) {
+    const newChart = new ChartDisplay(newChartDescriptor);
     newChart.fetchData();
     chartList.push(newChart);
 }

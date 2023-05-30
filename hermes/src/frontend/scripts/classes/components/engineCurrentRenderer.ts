@@ -19,7 +19,7 @@ engineCurrentRenderer = function(this: ChartDisplay): void {
                                 autoSkip: false,
                                 maxRotation: 90,
                                 minRotation: 90,
-                                callback: function (value, index) {
+                                callback: function (value: string | number, index: number) : string {
                                     // Hide every 100th tick label
                                     return index % 100 === 0 ? this.getLabelForValue(value as number) : "";
                                     // return new Date(this.getLabelForValue(Math.floor((value as number) / 1000))) !== new Date(this.getLabelForValue(Math.floor(((value as number) -1) / 1000))) ? this.get ;
