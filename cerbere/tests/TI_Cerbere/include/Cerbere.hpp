@@ -5,6 +5,8 @@
 #include "C_courantMoteur.hpp"
 #include "Consigne.hpp"
 #include "Signalement.h" 
+#include <thread>
+
 
 class Cerbere
 {
@@ -14,12 +16,14 @@ private:
     C_courantMoteur* leCourantMoteur;
     Consigne* consigne;
     Signalement* signal;
+    bool finRotation;
 
 public:
     Cerbere(Consigne* consigne, Signalement* signal);
     void lanceSurveillance();
     void verifierPresence();
     void verifierFixation();
+    thread tVerfierCourant();
     void verifierCourant();
     ~Cerbere();
 };

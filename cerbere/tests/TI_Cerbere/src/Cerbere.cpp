@@ -3,6 +3,7 @@
 #include <iostream>
 #include <math.h>
 
+
 Cerbere::Cerbere(Consigne* consigne,Signalement* signalement){
     
     leCourantMoteur = new C_courantMoteur();
@@ -15,7 +16,14 @@ void Cerbere::lanceSurveillance(){
 
 }
 
-void Cerbere::verifierCourant(bool* estEnMouvementHoraire, bool* estEnMouvementAntiHoraire){
+thread Cerbere::tVerfierCourant(){
+    return thread([this]{
+        verifierCourant();
+    });
+}
+
+
+void Cerbere::verifierCourant(){
     while (true){
 
         leCourantMoteur -> lire();
