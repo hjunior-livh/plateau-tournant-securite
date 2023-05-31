@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { StreamSubscriberPool } from '../utils/StreamSubscriberPool'
+import { StreamSubscriberPool } from '../utils/StreamSubscriberPool.cjs'
 import sqlite3 from 'sqlite3';
 
 

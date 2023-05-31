@@ -4,17 +4,17 @@ node_modules/
 # Visual Studio Code settings
 .vscode/
 
-# Built version
-build/
+# macOS Desktop Services Store files
+.DS_Store
 
 # Hermes TODO list
 hermes/TODO.md
 
-# macOS Desktop Services Store files
-.DS_Store
-
-# Hermes' logs
+# Hermes logs
 hermes/logs/*
 
+# Hermes build generated files
+hermes/build/*
+
 # Hermes public generated files
-hermes/public/
+hermes/public/*

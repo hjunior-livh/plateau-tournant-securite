@@ -1,7 +1,7 @@
 import express, { Express } from 'express'
-import { requestLogger } from './middlewares/requestLogger';
-import { uiRouter } from './routers/ui'
-import { apiRouter } from './routers/api'
+import { requestLogger } from './middlewares/requestLogger.cjs';
+import { uiRouter } from './routers/ui.cjs'
+import { apiRouter } from './routers/api.cjs'
 
 
 // Declaration of variables

@@ -2,12 +2,16 @@
   "name": "hermes",
   "version": "1.0.0",
   "description": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "./build/main.js",
   "scripts": {
-    "clear": "rimraf -g ./public/\"**\"/*",
-    "build": "npm run clear &&  rsync -a --exclude='*.ts' ./src/frontend/ ./public/ && tsc --project ./tsconfig.frontend.json",
-    "start": "ts-node --project ./tsconfig.backend.json ./src/backend/main.ts "
+    "clear-public": "rimraf -g ./public/\"**\"/*",
+    "clear-build": "rimraf -g ./build/\"**\"/*",
+    "clear": "npm run clear-public && npm run clear-build",
+    "build-frontend": "tsc --project ./tsconfig.frontend.json",
+    "build-backend": "tsc --project ./tsconfig.backend.json",
+    "build": "npm run clear && rsync -a --exclude='*.ts' ./src/frontend/ ./public/ && npm run build-frontend && npm run build-backend",
+    "start": "node ./build/main.cjs"
   },
   "author": "Hugo JUNIOR",
   "license": "",
