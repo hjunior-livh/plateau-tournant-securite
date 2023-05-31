@@ -1,4 +1,4 @@
-import { Chart } from "chart.js/auto";
+import { Chart } from "../../lib/chart.js/dist/types/index.js";
 let engineCurrentRenderer;
 engineCurrentRenderer = function () {
     if (this.chart === undefined) {
@@ -14,7 +14,6 @@ engineCurrentRenderer = function () {
                             callback: function (value, index) {
                                 // Hide every 100th tick label
                                 return index % 100 === 0 ? this.getLabelForValue(value) : "";
-                                //return index % 2 === 0 && typeof value === 'number' ? this.getLabelForValue(value) : '';
                                 // return new Date(this.getLabelForValue(Math.floor((value as number) / 1000))) !== new Date(this.getLabelForValue(Math.floor(((value as number) -1) / 1000))) ? this.get ;
                             }
                         }

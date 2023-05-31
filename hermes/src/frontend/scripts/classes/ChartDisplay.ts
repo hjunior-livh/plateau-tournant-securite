@@ -1,8 +1,8 @@
-import { Chart, ChartItem } from "chart.js/auto"
-import { EventDataEntry, EventDataset } from "../types/DatabaseTypes";
-import { ChartDescriptor } from "./ChartDescriptors";
-import { engineCurrentRenderer } from "./components/engineCurrentRenderer";
-import { ChartRenderer } from "./components/ChartRenderInterface";
+import type { Chart, ChartItem } from "../lib/chart.js/dist/types/index.js"
+import { EventDataEntry, EventDataset } from "../types/DatabaseTypes.js";
+import { ChartDescriptor } from "./ChartDescriptors.js";
+import { engineCurrentRenderer } from "./components/engineCurrentRenderer.js";
+import { ChartRenderer } from "./components/ChartRenderInterface.js";
 
 
 export class ChartDisplay {

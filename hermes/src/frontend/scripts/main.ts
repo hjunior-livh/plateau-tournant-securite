@@ -1,7 +1,7 @@
-import { ChartDisplay } from "./classes/ChartDisplay";
-import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors";
-import { StreamMessage } from "./types/CommunicationTypes";
-import { EventDataEntry } from "./types/DatabaseTypes";
+import { ChartDisplay } from "./classes/ChartDisplay.js";
+import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors.js";
+import { StreamMessage } from "./types/CommunicationTypes.js";
+import { EventDataEntry } from "./types/DatabaseTypes.js";
 
 
 let chartList: ChartDisplay[] = [];

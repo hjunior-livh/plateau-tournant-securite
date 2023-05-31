@@ -7,9 +7,6 @@ node_modules/
 # Built version
 build/
 
-# Parcel's cache
-.parcel-cache/
-
 # Hermes TODO list
 hermes/TODO.md
 
@@ -18,3 +15,6 @@ hermes/TODO.md
 
 # Hermes' logs
 hermes/logs/*
+
+# Hermes public generated files
+hermes/public/

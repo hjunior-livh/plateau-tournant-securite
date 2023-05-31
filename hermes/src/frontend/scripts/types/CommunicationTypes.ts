@@ -1,4 +1,4 @@
-import { DataEntry } from "./DatabaseTypes"
+import { DataEntry } from "./DatabaseTypes.js"
 
 export type StreamMessage = {
     table: string

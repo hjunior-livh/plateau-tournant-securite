@@ -1,5 +1,5 @@
-import { ChartDisplay } from "./classes/ChartDisplay";
-import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors";
+import { ChartDisplay } from "./classes/ChartDisplay.mjs";
+import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors.js";
 let chartList = [];
 for (const newChartDescriptor of CHART_DESCRIPTORS) {
     const newChart = new ChartDisplay(newChartDescriptor);
