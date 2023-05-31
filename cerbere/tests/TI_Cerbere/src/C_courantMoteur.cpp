@@ -15,20 +15,20 @@ C_courantMoteur::~C_courantMoteur() {
 
 float C_courantMoteur::getReleve() {
         std::cout << "le relevé est retourné" << std::endl;
-        relevé = 
         return releve;
 }
 
 void C_courantMoteur::lire() { 
-        std::cout << "nous allons lire" << std::endl;
+        //std::cout << "nous allons lire" << std::endl;
         
         int out = 0;
         for(int i = 0; i < 5; i++)
         {
                 out = out + capteur -> current();
+                //usleep(500)
         }
         
         releve = out / 5;
 
-        std::cout << "lecture effectué" << std::endl;
+        //std::cout << "lecture effectué" << std::endl;
 }
