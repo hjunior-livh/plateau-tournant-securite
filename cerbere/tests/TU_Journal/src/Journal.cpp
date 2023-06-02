@@ -16,6 +16,7 @@ void Journal::enregistrerIMoteur(float intensite){
     fichier.open ("~/valeurs/releve.csv", fstream::out | fstream::app);
     fichier << intensite << endl;
     fichier.close();
+    insererBDD(Journal::LOGIMOTEUR,intensite);
 }
 
 int Journal::enregistrerEvenement(int errcode, float valeur){
@@ -29,7 +30,7 @@ int Journal::enregistrerEvenement(int errcode, float valeur){
 	    tt = system_clock::to_time_t ( today );
 	    fichier << ctime(&tt) << " | Moteur bloqué. Intensité du courant: "<< valeur << " mA.";
         fichier.close();
-        insererBDD(EVENMOTEUR,0);
+        insererBDD(EVENMOTEUR,valeur);
     }
 }
 
@@ -54,5 +55,5 @@ Journal::~Journal(){
 }
 
 void Journal::insererBDD(int code, int valeur){
-    cout<<"on a bien inséré la donnée dans la BDD"<<endl;
+    cout<<"on a bien inséré la donnée: "<< valeur << " dans la BDD."<<endl;
 }

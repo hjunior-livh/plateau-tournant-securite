@@ -25,7 +25,7 @@ private:
 public:
 	static const int SIGNONCONF = 1;
 	static const int SIGNONDOUBLEHOR = 2;
-	static const int SIGNONDOUBEAR = 3;
+	static const int SIGNONDOUBLEAR = 3;
 	static const int ALERTEMOTEUR = 4;
 	static const int ALERTEBATTERIE = 5;
 	static const int ALERTEFIXATION = 6;

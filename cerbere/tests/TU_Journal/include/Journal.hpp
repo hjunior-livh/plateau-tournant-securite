@@ -17,6 +17,15 @@ private:
     /// à la BDD.
     /// @param valeur les evenements doivent etre dans les journaux avec
     /// leurs valeurs. Pour des envoies de log dans la BDD ce champ doit etre à 0.
+    /// @param EVENCONF 
+    /// @param EVENDOUBLEHOR 
+    /// @param EVENDOUBLEAR 
+    /// @param EVENMOTEUR 
+    /// @param EVENBATTERIE 
+    /// @param EVENFIXATION 
+    /// @param EVENPRESENCE
+    /// @param EVENCONNEXIONMOTEUR
+    /// @param LOGIMOTEUR
     void insererBDD(int code, int valeur);
 
 public:
@@ -30,7 +39,6 @@ public:
 	static const int EVENPRESENCE = 7;
 	static const int EVENCONNEXIONMOTEUR = 8;
 	static const int LOGIMOTEUR = 9;
-
     /// @brief met la valeur de intensite du courant dans un fichier csv
     /// afin de faire le graphique de la tension sur l'IHM.
     /// @param intensite valeur du courant du moteur a écrire dans chaques lignes.
@@ -45,9 +53,8 @@ public:
     /// @param EVENMOTEUR 
     /// @param EVENBATTERIE 
     /// @param EVENFIXATION 
-    /// @param EVENPRESENCE 
-    /// @param EVENCONNEXIONMOTEUR  
-    /// @param LOGIMOTEUR 
+    /// @param EVENPRESENCE
+    /// @param EVENCONNEXIONMOTEUR
     /// @param valeur va permettre de voir la valeur mesuré qui déclanche l'évenement
     int enregistrerEvenement(int errcode, float valeur);
 

@@ -76,7 +76,7 @@ void Signalement::signalerProbleme(int code)
 		_alerteSignauxNonconformes = true;
 	else if (code == SIGNONDOUBLEHOR)
 		_alerteOrdreDoubleHoraire = true;
-	else if (code == SIGNONDOUBEAR)
+	else if (code == SIGNONDOUBLEAR)
 		_alerteOrdreDoubleAntiHoraire = true;
 	else if (code == ALERTEMOTEUR)
 		_alerteMoteur = true;

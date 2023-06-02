@@ -18,16 +18,11 @@ float C_courantMoteur::getReleve() {
         return releve;
 }
 
-void C_courantMoteur::lire() { 
-        //std::cout << "nous allons lire" << std::endl;
-        
+void C_courantMoteur::lire() {        
         int out = 0;
         for(int i = 0; i < 5; i++)
         {
                 out = out + capteur -> current();
-        }
-        
+        }       
         releve = out / 5;
-
-        //std::cout << "lecture effectué" << std::endl;
 }
