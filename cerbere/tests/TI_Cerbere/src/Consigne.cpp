@@ -4,7 +4,7 @@
 
 Consigne::Consigne(){
     seuilBlocageMin = 10;
-    seuilBlocageAlerte = 150;
+    seuilBlocageAlerte = 110;
     seuilBlocageBranchement = 2;
 }
 

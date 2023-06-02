@@ -4,7 +4,8 @@
 //penser a inclure les 2 classe de William comme celle la:
 #include "C_courantMoteur.hpp"
 #include "Consigne.hpp"
-#include "Signalement.h" 
+#include "Signalement.h"
+#include "Journal.hpp" 
 #include <thread>
 
 
@@ -16,10 +17,11 @@ private:
     C_courantMoteur* leCourantMoteur;
     Consigne* consigne;
     Signalement* signal;
+    Journal* journal;
     bool finRotation;
 
 public:
-    Cerbere(Consigne* consigne, Signalement* signal);
+    Cerbere(Consigne* consigne, Signalement* signal, Journal* journal);
     void lanceSurveillance();
     void verifierPresence();
     void verifierFixation();

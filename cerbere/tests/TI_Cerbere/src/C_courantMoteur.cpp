@@ -25,7 +25,6 @@ void C_courantMoteur::lire() {
         for(int i = 0; i < 5; i++)
         {
                 out = out + capteur -> current();
-                //usleep(500)
         }
         
         releve = out / 5;

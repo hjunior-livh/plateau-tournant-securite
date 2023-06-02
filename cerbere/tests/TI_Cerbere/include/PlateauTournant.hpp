@@ -8,6 +8,7 @@ using namespace std;
 #include "Signalement.h"
 #include "Cerbere.hpp"
 #include "Consigne.hpp"
+#include  "Journal.hpp"
 
 class PlateauTournant
 {
@@ -18,6 +19,7 @@ private:
     Signalement* lessignalements;
     Cerbere* laSecurite;
     Consigne* lesConsignes;
+    Journal* lesJournaux;
 public:
     PlateauTournant();
     bool getEstEnMouvementHoraire();

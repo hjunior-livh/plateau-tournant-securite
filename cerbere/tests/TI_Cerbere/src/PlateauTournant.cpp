@@ -7,7 +7,7 @@
 PlateauTournant::PlateauTournant(){
     lessignalements = new Signalement();
     lesConsignes = new Consigne();
-    laSecurite = new Cerbere(lesConsignes,lessignalements);
+    laSecurite = new Cerbere(lesConsignes,lessignalements,lesJournaux);
 
     estEnMouvementHoraire = false;
     estEnMouvementAntiHoraire = false;
