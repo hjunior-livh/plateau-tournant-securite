@@ -65,7 +65,7 @@ export class ChartDisplay {
     }
 
     fetchData(): void {
-        this.xhr.open("GET", `/api/get/${this.dataTable}/${this.defaultDataQuantity}/`);
+        this.xhr.open("GET", `/api/table/${this.dataTable}/${this.defaultDataQuantity}/`);
         this.xhr.send();
         this.xhr.addEventListener("load", () => {
             if (this.xhr.readyState === this.xhr.DONE) {

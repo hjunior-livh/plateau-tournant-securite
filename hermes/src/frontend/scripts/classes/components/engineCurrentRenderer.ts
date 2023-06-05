@@ -1,5 +1,5 @@
-import type { ChartDataset } from "../../lib/chart.js/dist/types/index.d.ts"
-import {Chart} from "../../lib/chart.js/dist/types/index.js"
+import type { ChartDataset } from "../../lib/chart.js/dist/types/index.js"
+import { Chart } from "../../lib/chart.js/dist/types/index.js"
 import { EngineCurrentEntry, EventDataEntry } from "../../types/DatabaseTypes.js";
 import { ChartDisplay } from "../ChartDisplay.js";
 import { ChartRenderer } from "./ChartRenderInterface.js";

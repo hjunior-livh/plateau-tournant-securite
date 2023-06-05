@@ -3,6 +3,8 @@ import { requestLogger } from './middlewares/requestLogger.cjs';
 import { uiRouter } from './routers/ui.cjs'
 import { apiRouter } from './routers/api.cjs'
 
+import { parseCSV } from "./utils/parseCSV.cjs"
+
 
 // Declaration of variables
 const app: Express = express();
@@ -21,4 +23,12 @@ app.use("/api", apiRouter);
 // Server launch
 app.listen(port, () => {
 	console.log(`[i] Hermes server launched: http://localhost:${port}`);
+
+	parseCSV("./logs/releve.csv")
+		.then((data) => {
+			console.log(data);
+		})
+		.catch((error) => {
+			console.error('Error reading/parsing CSV:', error);
+		});
 });
