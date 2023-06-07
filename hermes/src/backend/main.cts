@@ -24,7 +24,7 @@ app.use("/api", apiRouter);
 app.listen(port, () => {
 	console.log(`[i] Hermes server launched: http://localhost:${port}`);
 
-	parseCSV("./logs/releve.csv")
+	parseCSV("./data/releve.csv")
 		.then((data) => {
 			console.log(data);
 		})

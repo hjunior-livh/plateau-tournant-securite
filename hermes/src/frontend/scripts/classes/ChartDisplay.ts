@@ -1,51 +1,51 @@
 import type { Chart, ChartItem } from "../lib/chart.js/dist/types/index.js"
 import { EventDataEntry, EventDataset } from "../types/DatabaseTypes.js";
-import { ChartDescriptor } from "./ChartDescriptors.js";
-import { engineCurrentRenderer } from "./components/engineCurrentRenderer.js";
-import { ChartRenderer } from "./components/ChartRenderInterface.js";
+import { ChartDescriptor } from "../types/ChartDescriptors.js";
+import { ChartRenderer } from "../types/ChartRenderInterface.js";
 
 
 export class ChartDisplay {
 
+    public render: ChartRenderer;
     public readonly id: string;
-    private HTMLElementId: string;
-    public readonly dataTable: string;
-    private defaultDataQuantity: number;
-    private canvas: HTMLCanvasElement | null;
+    public readonly dataType: string;
+    public readonly dataTable?: string;
+
+    private _HTMLElementId: string;
+    private _defaultDataQuantity?: number;
+    private _filename?: string;
+    private _canvas: HTMLCanvasElement | null;
     private _ctx: ChartItem;
     private _data: EventDataset;
     private _chart?: Chart;
-    private xhr: XMLHttpRequest;
-    public render: ChartRenderer;
-
-    constructor(chartDescriptor: ChartDescriptor) {
-        let renderFunction: ChartRenderer;
-
-        this.id = chartDescriptor.chartId;
-        this.HTMLElementId = chartDescriptor.HTMLElementId;
-        this.dataTable = chartDescriptor.dataTable;
-        this.defaultDataQuantity = chartDescriptor.defaultDataQuantity;
-        this.canvas = document.getElementById(this.HTMLElementId) as HTMLCanvasElement | null; // !!!
-        if (this.canvas === null) {
+    private _xhr: XMLHttpRequest;
+    
+    constructor(descriptor: ChartDescriptor) {
+        this.id = descriptor.chartId;
+        this.dataType = descriptor.dataType;
+        this._HTMLElementId = descriptor.HTMLElementId;
+        this._canvas = document.getElementById(this._HTMLElementId) as (HTMLCanvasElement | null); // !!!
+        if (this._canvas === null) {
             throw new Error("Invalid canvasID");
         }
-        this._ctx = this.canvas.getContext("2d") as ChartItem;
+        this._ctx = this._canvas.getContext("2d") as ChartItem;
         if (this._ctx === null) {
             throw new Error("Unable to get 2D context");
         }
         this._data = [];
-        this.xhr = new XMLHttpRequest();
-        switch (chartDescriptor.chartId) {
-            case "engine-current":
-                renderFunction = engineCurrentRenderer;
+        this._xhr = new XMLHttpRequest();
+
+        switch (descriptor.dataType) {
+            case "sql":
+                this.dataTable = descriptor.dataTable;
+                this._defaultDataQuantity = descriptor.defaultDataQuantity;
                 break;
-            // case "...":
-            //     module = ...
-            //      break;
-            default:
-                throw new Error(`Invalid chartId "${chartDescriptor.chartId}": render not found`);
+            case "csv":
+                this._filename = descriptor.filename
+                break;
         }
-        this.render = () => renderFunction.call(this);
+        this.render = descriptor.renderFunction
+        this.render()
     }
 
     public get ctx() {
@@ -56,21 +56,21 @@ export class ChartDisplay {
         return this._data;
     }
 
-    public get chart() {
+    public get chart(): Chart | undefined {
         return this._chart;
     }
 
-    public set chart(providedChart: Chart | undefined) {
-        this._chart = providedChart;
+    public set chart(chart: Chart | undefined ) {
+        this._chart = chart;
     }
 
     fetchData(): void {
-        this.xhr.open("GET", `/api/table/${this.dataTable}/${this.defaultDataQuantity}/`);
-        this.xhr.send();
-        this.xhr.addEventListener("load", () => {
-            if (this.xhr.readyState === this.xhr.DONE) {
-                if (this.xhr.status === 200) {
-                    this._data = JSON.parse(this.xhr.responseText);
+        this._xhr.open("GET", `/api/table/${this.dataTable}/${this._defaultDataQuantity}/`);
+        this._xhr.send();
+        this._xhr.addEventListener("load", () => {
+            if (this._xhr.readyState === this._xhr.DONE) {
+                if (this._xhr.status === 200) {
+                    this._data = JSON.parse(this._xhr.responseText);
                     this._data.sort((a: EventDataEntry, b: EventDataEntry) => (a.epoch - b.epoch));
                     this.render();
                 } else {

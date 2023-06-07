@@ -1,27 +1,14 @@
-/**
- * 
- */
-export type ChartDescriptor = {
-    chartId: string,
-    HTMLElementId: string,
-    dataType: "sqlite" | "csv",
-} & (
-    {
-        dataTable: string,
-        defaultDataQuantity: number
-    } | {
-        filename: string
-    }
-)
+import { ChartDescriptor } from "../types/ChartDescriptors.js";
+import { engineCurrentRenderer } from "./components/engineCurrentRenderer.js";
 
 
 export const CHART_DESCRIPTORS: ChartDescriptor[] = [
     {
         chartId: "engine-current",
         HTMLElementId: "engineCurrentChart",
+        renderFunction: engineCurrentRenderer,
         dataType: "csv",
-        dataTable: "courant_moteur",
-        defaultDataQuantity: 1000
+        filename: "releve.csv"
     }
     //...
 ];
