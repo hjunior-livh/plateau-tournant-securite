@@ -1,7 +1,7 @@
 import type { Chart, ChartItem } from "../lib/chart.js/dist/types/index.js"
-import { EventDataEntry, EventDataset } from "../types/DatabaseTypes.js";
-import { ChartDescriptor } from "../types/ChartDescriptors.js";
-import { ChartRenderer } from "../types/ChartRenderInterface.js";
+import type { EventDataEntry, EventDataset } from "../types/DatabaseTypes.js";
+import type { ChartDescriptor } from "../types/ChartDescriptors.js";
+import type { ChartRenderer } from "../types/ChartRenderInterface.js";
 
 
 export class ChartDisplay {

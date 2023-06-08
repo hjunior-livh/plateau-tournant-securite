@@ -1,4 +1,4 @@
-import { ChartDescriptor } from "../types/ChartDescriptors.js";
+import type { ChartDescriptor } from "../types/ChartDescriptors.js";
 import { engineCurrentRenderer } from "./components/engineCurrentRenderer.js";
 
 

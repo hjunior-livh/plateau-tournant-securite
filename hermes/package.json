@@ -8,8 +8,8 @@
     "clear-public": "rimraf -g ./public/\"**\"/*",
     "clear-build": "rimraf -g ./build/\"**\"/*",
     "clear": "npm run clear-public && npm run clear-build",
-    "build-frontend": "tsc --project ./tsconfig.frontend.json",
-    "build-backend": "tsc --project ./tsconfig.backend.json",
+    "build-frontend": "tsc --build ./tsconfig.frontend.json",
+    "build-backend": "tsc --build ./tsconfig.backend.json",
     "build": "npm run clear && rsync -a --exclude='*.ts' ./src/frontend/ ./public/ && npm run build-frontend && npm run build-backend",
     "start": "node ./build/main.cjs"
   },

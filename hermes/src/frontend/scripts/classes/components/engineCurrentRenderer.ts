@@ -1,8 +1,9 @@
-import type { ChartDataset } from "../../lib/chart.js/dist/types/index.js"
 import { Chart } from "../../lib/chart.js/dist/types/index.js"
-import { EngineCurrentEntry, EventDataEntry } from "../../types/DatabaseTypes.js";
-import { ChartDisplay } from "../ChartDisplay.js";
-import { ChartRenderer } from "../../types/ChartRenderInterface.js";
+import type { ChartDataset } from "../../lib/chart.js/dist/types/index.js"
+import type { EngineCurrentEntry, EventDataEntry } from "../../types/DatabaseTypes.js";
+import type { ChartDisplay } from "../ChartDisplay.js";
+import type { ChartRenderer } from "../../types/ChartRenderInterface.js";
+
 
 
 let engineCurrentRenderer: ChartRenderer;

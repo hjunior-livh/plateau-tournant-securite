@@ -1,8 +1,7 @@
 import { ChartDisplay } from "./classes/ChartDisplay.js";
 import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors.js";
-import { StreamMessage } from "./types/CommunicationTypes.js";
-import { EventDataEntry } from "./types/DatabaseTypes.js";
-import { SQLChartDescriptor } from "./types/ChartDescriptors.js";
+import type { StreamMessage } from "./types/CommunicationTypes.js";
+import type { EventDataEntry } from "./types/DatabaseTypes.js";
 
 
 let chartList: ChartDisplay[] = [];
