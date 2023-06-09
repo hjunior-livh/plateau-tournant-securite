@@ -4,7 +4,7 @@ import type { StreamMessage } from "./types/CommunicationTypes.js";
 import type { EventDataEntry } from "./types/DatabaseTypes.js";
 
 
-const rotationSelection = document.getElementById("rotationSelection") as HTMLElement;
+const rotationSelection = document.getElementById("rotationSelection") as HTMLSelectElement;
 let chartList: ChartDisplay[] = [];
 const eventStream: EventSource = new EventSource("api/stream/");
 const xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -13,18 +13,25 @@ const xhr: XMLHttpRequest = new XMLHttpRequest();
 // Rotation selection
 xhr.open("GET", "/api/get-rotation-files/", true);
 xhr.onreadystatechange = function () {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    const filenames = JSON.parse(xhr.responseText);
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        const filenames = JSON.parse(xhr.responseText);
 
-    fruits.forEach((fruit: any) => {
-      const optionElement = document.createElement("option");
-      
-      optionElement.textContent = fruit;
-      rotationSelection.appendChild(optionElement);
-    });
-  }
+        filenames.forEach((filename: string) => {
+            const optionElement = document.createElement("option");
+            optionElement.textContent = filename;
+            rotationSelection.appendChild(optionElement);
+        });
+    }
 };
 xhr.send();
+
+rotationSelection.addEventListener("change", function () {
+    const selectedOption = rotationSelection.options[rotationSelection.selectedIndex];
+    const selectedValue = selectedOption.value;
+
+    xhr.open("GET", `/api/get-rotation-file/${selectedValue}`, true);
+    xhr.send();
+});
 
 
 // Charts

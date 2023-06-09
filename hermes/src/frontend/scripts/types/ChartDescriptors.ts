@@ -3,8 +3,8 @@ import type { ChartDisplay } from "../classes/ChartDisplay.js"
 export type BaseChartDescriptor = {
     chartId: string,
     HTMLElementId: string,
-    dataType: "sql" | "csv"
-    renderFunction: (this: ChartDisplay) => void 
+    dataType: "sql" | "csv",
+    renderFunction: (this: ChartDisplay) => void
 }
 
 export type SQLChartDescriptor = BaseChartDescriptor & {
@@ -14,8 +14,8 @@ export type SQLChartDescriptor = BaseChartDescriptor & {
 }
 
 export type CSVChartDiscriptor = BaseChartDescriptor & {
-    dataType: "csv"
+    dataType: "csv",
     filename: string
 }
 
-export type ChartDescriptor =  SQLChartDescriptor | CSVChartDiscriptor
+export type ChartDescriptor = SQLChartDescriptor | CSVChartDiscriptor

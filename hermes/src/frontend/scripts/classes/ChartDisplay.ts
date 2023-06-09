@@ -1,6 +1,6 @@
 import type { Chart, ChartItem } from "../lib/chart.js/dist/types/index.js"
 import type { EventDataEntry, EventDataset } from "../types/DatabaseTypes.js";
-import type { ChartDescriptor } from "../types/ChartDescriptors.js";
+import type { ChartDescriptor, SQLChartDescriptor, CSVChartDiscriptor } from "../types/ChartDescriptors.js";
 import type { ChartRenderer } from "../types/ChartRenderInterface.js";
 
 
@@ -19,7 +19,7 @@ export class ChartDisplay {
     private _data: EventDataset;
     private _chart?: Chart;
     private _xhr: XMLHttpRequest;
-    
+
     constructor(descriptor: ChartDescriptor) {
         this.id = descriptor.chartId;
         this.dataType = descriptor.dataType;
@@ -44,9 +44,15 @@ export class ChartDisplay {
                 this._filename = descriptor.filename
                 break;
         }
+
         this.render = descriptor.renderFunction
         this.render()
     }
+
+    // Peut être faire la même chose avec le fetchData qu'avec la method render
+    // Faire du error handling sur les requetes de csv
+    // utiliser la requete de csv générique pour les csv de courants
+    // struct avec la localisation de /types/ et les options de trabspilation/compilation
 
     public get ctx() {
         return this._ctx;
@@ -60,7 +66,7 @@ export class ChartDisplay {
         return this._chart;
     }
 
-    public set chart(chart: Chart | undefined ) {
+    public set chart(chart: Chart | undefined) {
         this._chart = chart;
     }
 

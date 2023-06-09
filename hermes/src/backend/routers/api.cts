@@ -7,7 +7,8 @@ import fs from 'fs';
 
 const apiRouter: Router = Router();
 const TableParamRegex: RegExp = new RegExp(/^[A-Za-z_]+$/);
-const QuantityParamRegex: RegExp = new RegExp(/^\d{1,5}$/)
+const QuantityParamRegex: RegExp = new RegExp(/^\d{1,5}$/);
+const engineCurrentFileRegex: RegExp = new RegExp(/^releves_.*\.csv$/);
 const streamSubscribers: StreamSubscriberPool = new StreamSubscriberPool();
 let argTable: string;
 let argQuantity: number;
@@ -71,14 +72,19 @@ apiRouter.get("/stream/", (req: Request, res: Response) => {
 // API: CSV Rotation files
 apiRouter.get("/get-rotation-files/", (req: Request, res: Response) => {
 	const filenames = fs.readdirSync("./data/engine-current/");
-	res.send(JSON.stringify(filenames)); 
+	res.send(JSON.stringify(filenames));
 })
 
 
 // API: CSV Rotation file
 apiRouter.get("/get-rotation-file/:filename/", (req: Request, res: Response) => {
-	const filenames = fs.
-	res.send(JSON.stringify(filenames)); 
+	parseCSV(`./data/engine-current/${req.params.filename}`)
+		.then((data: string[][]) => {
+			res.send(JSON.stringify(data
+				.flat()
+				.filter((filename: string) => engineCurrentFileRegex.test(filename))
+			))
+		})
 })
 
 
