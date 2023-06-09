@@ -16,6 +16,7 @@
   "author": "Hugo JUNIOR",
   "license": "",
   "devDependencies": {
+    "@kurkle/color": "^0.3.2",
     "@types/chart.js": "^2.9.37",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",

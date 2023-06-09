@@ -8,6 +8,7 @@
     <meta name="description" content="Serveur de supervision">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/dropdown.css">
     <link rel="stylesheet" href="./fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="./scripts/lib/chart.js/dist/chart.umd.js"></script>
 </head>
@@ -17,18 +18,20 @@
         <div id="header">
             <div id="navbar">
                 <a class="topbarShortcut" href="#">Hermes</a>
-                <a class="topbarShortcut" href="#logsSection">Journaux</a>
                 <a class="topbarShortcut" href="#dataSection">Données</a>
                 <a class="topbarShortcut" href="#configurationSection">Configuration</a>
             </div>
         </div>
         <div id="main">
-            <div id="logsSection" class="pageSection">
-                <h2><i class="fa fa-book" aria-hidden="true"></i> Journaux</h2>
-            </div>
             <div id="dataSection" class="pageSection">
                 <h2><i class="fa fa-database" aria-hidden="true"></i> Données du cube</h2>
-                <h3></h3>
+                <h3>Courant moteur</h3>
+
+                <label for="pet-select">Choose a pet:</label>
+                <select id="rotationSelection">
+                    <option value="">--Please choose an option--</option>
+                </select>
+
                 <canvas id="engineCurrentChart"></canvas>
             </div>
             <div id="configurationSection" class="pageSection">
@@ -37,7 +40,7 @@
         </div>
         <footer>Hugo JUNIOR</footer>
     </div>
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/main.js" type="module"></script>
 </body>
 
 </html>

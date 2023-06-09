@@ -1,9 +1,9 @@
-import express, { Express } from 'express'
-import { requestLogger } from './middlewares/requestLogger.cjs';
-import { uiRouter } from './routers/ui.cjs'
-import { apiRouter } from './routers/api.cjs'
-
+import express, { Express } from "express"
+import { requestLogger } from "./middlewares/requestLogger.cjs";
+import { uiRouter } from "./routers/ui.cjs"
+import { apiRouter } from "./routers/api.cjs"
 import { parseCSV } from "./utils/parseCSV.cjs"
+import { setupLogging } from "./utils/requestLogSetup.cjs"
 
 
 // Declaration of variables
@@ -24,7 +24,9 @@ app.use("/api", apiRouter);
 app.listen(port, () => {
 	console.log(`[i] Hermes server launched: http://localhost:${port}`);
 
-	parseCSV("./data/releve.csv")
+	setupLogging()
+
+	parseCSV("./data/engine-current/releve.csv")
 		.then((data) => {
 			console.log(data);
 		})

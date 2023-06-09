@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { StreamSubscriberPool } from '../classes/StreamSubscriberPool.cjs'
 import { parseCSV } from '../utils/parseCSV.cjs';
 import sqlite3 from 'sqlite3';
+import fs from 'fs';
 
 
 const apiRouter: Router = Router();
@@ -61,10 +62,24 @@ apiRouter.post("/table/:table/", (req: Request, res: Response) => {
 });
 
 
-// SSE stream
+// API: SSE stream
 apiRouter.get("/stream/", (req: Request, res: Response) => {
 	streamSubscribers.addSubscriber(res);
 });
+
+
+// API: CSV Rotation files
+apiRouter.get("/get-rotation-files/", (req: Request, res: Response) => {
+	const filenames = fs.readdirSync("./data/engine-current/");
+	res.send(JSON.stringify(filenames)); 
+})
+
+
+// API: CSV Rotation file
+apiRouter.get("/get-rotation-file/:filename/", (req: Request, res: Response) => {
+	const filenames = fs.
+	res.send(JSON.stringify(filenames)); 
+})
 
 
 export { apiRouter }
