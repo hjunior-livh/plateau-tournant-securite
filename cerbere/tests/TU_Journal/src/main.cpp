@@ -7,11 +7,17 @@
 
 int main()
 {
-    float intensite = 70.432978;
+    float intensite;
     Journal* journal = new Journal("~/BDD");
+
+    std::cout << "veuillez entrer une valeure de mesure a journalisé: ";
+    std::cin >> intensite;
+    std::cout << std::endl;
 
     journal -> enregistrerIMoteur(intensite);
 
-    intensite  = 594058.4345;
+    std::cout << "veuillez entrer une valeure de mesure qui va etre assimilé a un evenement: ";
+    std::cin >> intensite;
+    std::cout << std::endl;
     journal -> enregistrerEvenement(Journal::EVENMOTEUR,intensite);
 }

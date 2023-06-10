@@ -7,7 +7,7 @@ C_courantMoteur::C_courantMoteur() {
         //float INTERVAL = 10.0;
         capteur = new INA219(SHUNT_OHMS, MAX_EXPECTED_AMPS);
         capteur -> configure(RANGE_16V, GAIN_8_320MV, ADC_12BIT, ADC_12BIT);
-        std::cout << "l'objet a été fait" << std::endl;
+        //std::cout << "l'objet a été fait" << std::endl;
 }
 
 C_courantMoteur::~C_courantMoteur() {

@@ -2,58 +2,56 @@
 #include <csignal>
 using namespace std;
 
-#ifndef SIGNALEMENT_H
-#define SIGNALEMENT_H
+#ifndef __Signalement_h__
+#define __Signalement_h__
 
 class Signalement
 {
 private:
 	bool _alerteMoteur;
-
-private:
 	bool _alerteBatterie;
-
-private:
 	bool _alerteFixation;
-
-private:
 	bool _alertePresence;
 	bool _alerteSignauxNonconformes;
 	bool _alerteOrdreDoubleHoraire;
 	bool _alerteOrdreDoubleAntiHoraire;
+	bool _alerterForcer;
+	bool _alerterConnexionMoteur;		
 
 public:
 	static const int SIGNONCONF = 1;
 	static const int SIGNONDOUBLEHOR = 2;
-	static const int SIGNONDOUBLEAR = 3;
+	static const int SIGNONDOUBEAR = 3;
 	static const int ALERTEMOTEUR = 4;
 	static const int ALERTEBATTERIE = 5;
 	static const int ALERTEFIXATION = 6;
 	static const int ALERTEPRESENCE = 7;
-
+	static const int ALERTEFORCER = 8;	
+	static const int CONNEXIONMOTEUR = 9;
 public:
+	~Signalement();
+
+	Signalement();
+
 	bool getAlerteMoteur();
 
-public:
 	void setAlerteMoteur(bool aAlerteMoteur);
 
-public:
 	bool getAlerteBatterie();
 
-public:
 	void setAlerteBatterie(bool aAlerteBatterie);
 
-public:
 	bool getAlerteFixation();
 
-public:
 	void setAlerteFixation(bool aAlerteFixation);
 
-public:
 	bool getAlertePresence();
 
-public:
 	void setAlertePresence(bool aAlertePresence);
+
+	bool getAlerteForcer();
+
+	void setAlerteForcer(bool aAlerteForcer);	
 
 public:
 	bool getAlerteSignauxNonconformes();
@@ -66,6 +64,8 @@ public:
 	void setAlerteSignauxNonconformese(bool aalerteSignauxNonconformes);
 	void setAlerteOrdreDoubleHoraire(bool alerteOrdreDoubleHoraire);
 	void setAlerteOrdreDoubleAntiHorairee(bool aalerteOrdreDoubleAntiHoraire);
+	void setAlerterConnexionMoteur(bool alerterConnexionMoteur);
+	bool getAlerterConnexionMoteur();	
 
 public:
 	void signalerProbleme(int code);

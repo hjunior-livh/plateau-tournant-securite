@@ -12,6 +12,6 @@ int main()
         int valeur = machin->getReleve();
         valeur = roundf(valeur);
         std::cout << valeur << std::endl;
-        usleep(100000);
+        usleep(500000);
     }
 }

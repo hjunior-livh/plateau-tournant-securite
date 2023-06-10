@@ -27,6 +27,7 @@ public:
     void verifierFixation();
     thread tVerfierCourant();
     void verifierCourant();
+    void setfinRotation(bool etatFinRotation);
     ~Cerbere();
 };
 
