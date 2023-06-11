@@ -1,6 +1,6 @@
-import type { DataEntry } from "./DatabaseTypes.js"
+import type { SQLDataEntry } from "./SQLDatabaseTypes.js"
 
 export type StreamMessage = {
     table: string
-    entry: DataEntry
+    entry: SQLDataEntry
 }

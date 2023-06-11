@@ -21,13 +21,13 @@ const db = new sqlite3.Database('./data/simulated_data.db', sqlite3.OPEN_READONL
 });
 
 
-// API: send SQLite data to client
+// Send SQLite data to client
 apiRouter.get("/table/:table/:quantity/", (req: Request, res: Response) => {
 	argTable = req.params.table;
 	argQuantity = parseInt(req.params.quantity, 10);
 
 	if (isNaN(argQuantity)) {
-		res.status(400).send({ "error": "Invalid 'quantity' argument (Integer parsing failed)" })
+		res.send({ "error": "Invalid 'quantity' argument (Integer parsing failed)" }).status(400);
 	}
 
 	else if (TableParamRegex.test(argTable) && QuantityParamRegex.test(argQuantity.toString())) {
@@ -38,24 +38,25 @@ apiRouter.get("/table/:table/:quantity/", (req: Request, res: Response) => {
 			res.send(rows);
 		});
 	} else {
-		res.status(400).send({ "error": "Invalid arguments (Regex check failed)" });
+		res.send({ "error": "Invalid arguments (Regex check failed)" }).status(400);
 	}
 });
 
 
-// API: data 
-apiRouter.get("/csv/:filename/", (req: Request, res: Response) => {
-	parseCSV(req.params.filename)
+// Send CSV data to the client
+apiRouter.get("/csv/:folder/:filename/", (req: Request, res: Response) => {
+	parseCSV(`${req.params.folder}/${req.params.filename}`)
 		.then((data) => {
-			res.send(data)
+			res.send(data).end();
 		})
 		.catch((error) => {
 			console.error('Error reading/parsing CSV:', error);
+			res.send({ "error": "Error reading/parsing CSV" }).status(400);
 		});
 })
 
 
-// API: data reception
+// Data reception
 apiRouter.post("/table/:table/", (req: Request, res: Response) => {
 	console.log(`[+] New data incoming: TABLE=${req.params.table}`);
 	res.status(200).end();
@@ -63,28 +64,17 @@ apiRouter.post("/table/:table/", (req: Request, res: Response) => {
 });
 
 
-// API: SSE stream
+// SSE stream
 apiRouter.get("/stream/", (req: Request, res: Response) => {
 	streamSubscribers.addSubscriber(res);
 });
 
 
-// API: CSV Rotation files
+// CSV Rotation files
 apiRouter.get("/get-rotation-files/", (req: Request, res: Response) => {
-	const filenames = fs.readdirSync("./data/engine-current/");
-	res.send(JSON.stringify(filenames));
-})
-
-
-// API: CSV Rotation file
-apiRouter.get("/get-rotation-file/:filename/", (req: Request, res: Response) => {
-	parseCSV(`./data/engine-current/${req.params.filename}`)
-		.then((data: string[][]) => {
-			res.send(JSON.stringify(data
-				.flat()
-				.filter((filename: string) => engineCurrentFileRegex.test(filename))
-			))
-		})
+	let filenames = fs.readdirSync("./data/engine-current/");
+	filenames = filenames.filter((filename: string) => engineCurrentFileRegex.test(filename));
+	res.send(JSON.stringify(filenames)).end();;
 })
 
 

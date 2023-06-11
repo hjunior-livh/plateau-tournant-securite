@@ -1,11 +1,14 @@
-import { ChartDisplay } from "./classes/ChartDisplay.js";
-import { CHART_DESCRIPTORS } from "./classes/ChartDescriptors.js";
+import { ChartFactory } from "./classes/ChartFactory.js";
+import { CHART_DESCRIPTORS } from "./types/ChartDescriptors.js";
+import { SQLChart } from "./classes/SQLChart.js";
 import type { StreamMessage } from "./types/CommunicationTypes.js";
-import type { EventDataEntry } from "./types/DatabaseTypes.js";
+import type { SQLEventDataEntry } from "./types/SQLDatabaseTypes.js";
+import type { Chart } from "./types/Chart.js";
 
 
 const rotationSelection = document.getElementById("rotationSelection") as HTMLSelectElement;
-let chartList: ChartDisplay[] = [];
+let chartList: {[key: string]: Chart} = {};
+let chartFactory = new ChartFactory()
 const eventStream: EventSource = new EventSource("api/stream/");
 const xhr: XMLHttpRequest = new XMLHttpRequest();
 
@@ -13,7 +16,7 @@ const xhr: XMLHttpRequest = new XMLHttpRequest();
 // Rotation selection
 xhr.open("GET", "/api/get-rotation-files/", true);
 xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
+    if (xhr.readyState === xhr.DONE && xhr.status === 200) {
         const filenames = JSON.parse(xhr.responseText);
 
         filenames.forEach((filename: string) => {
@@ -25,28 +28,28 @@ xhr.onreadystatechange = function () {
 };
 xhr.send();
 
-rotationSelection.addEventListener("change", function () {
+rotationSelection.addEventListener("change", function() {
     const selectedOption = rotationSelection.options[rotationSelection.selectedIndex];
-    const selectedValue = selectedOption.value;
-
-    xhr.open("GET", `/api/get-rotation-file/${selectedValue}`, true);
+    const selectedValue = selectedOption.text;
+    
+    xhr.open("GET", `/api/csv/engine-current/${selectedValue}`, true);
     xhr.send();
 });
 
 
 // Charts
 for (const newChartDescriptor of CHART_DESCRIPTORS) {
-    const newChart = new ChartDisplay(newChartDescriptor);
+    const newChart = chartFactory.produceChart(newChartDescriptor);
     newChart.fetchData();
-    chartList.push(newChart);
+    chartList[newChartDescriptor.chartId] = newChart;
 }
 
 eventStream.addEventListener("new_data", (event) => {
     const newMessage: StreamMessage = JSON.parse(event.data) as StreamMessage;
-    for (let chart of chartList) {
-        if (chart.dataType === "sql") {
+    for (let chart of Object.values(chartList)) {
+        if (chart instanceof SQLChart) {
             if (chart.dataTable === newMessage.table) {
-                chart.updateData(newMessage.entry as EventDataEntry);
+                chart.updateData(newMessage.entry as SQLEventDataEntry);
             }
         }
     }
