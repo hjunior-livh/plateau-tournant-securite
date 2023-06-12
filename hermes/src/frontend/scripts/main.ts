@@ -4,6 +4,7 @@ import { SQLChart } from "./classes/SQLChart.js";
 import type { StreamMessage } from "./types/CommunicationTypes.js";
 import type { SQLEventDataEntry } from "./types/SQLDatabaseTypes.js";
 import type { Chart } from "./types/Chart.js";
+import { CSVChart } from "./classes/CSVChart.js";
 
 
 const rotationSelection = document.getElementById("rotationSelection") as HTMLSelectElement;
@@ -31,16 +32,13 @@ xhr.send();
 rotationSelection.addEventListener("change", function() {
     const selectedOption = rotationSelection.options[rotationSelection.selectedIndex];
     const selectedValue = selectedOption.text;
-    
-    xhr.open("GET", `/api/csv/engine-current/${selectedValue}`, true);
-    xhr.send();
+    (chartList["engine-current"] as CSVChart).updateData(selectedValue);
 });
 
 
 // Charts
 for (const newChartDescriptor of CHART_DESCRIPTORS) {
     const newChart = chartFactory.produceChart(newChartDescriptor);
-    newChart.fetchData();
     chartList[newChartDescriptor.chartId] = newChart;
 }
 

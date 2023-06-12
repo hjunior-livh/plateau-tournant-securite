@@ -1,5 +1,5 @@
 import { BaseChart } from "./BaseChart.js";
-import { Chart as ChartJs } from "../lib/chart.js/dist/types/index.js"
+import { Chart } from "../lib/chart.js/dist/types/index.js"
 import type { SQLChartDescriptor } from "../types/ChartDescriptors.js";
 import type { ChartDataset } from "../lib/chart.js/dist/types/index.js"
 import type { EngineCurrentEntry, SQLEventDataEntry } from "../types/SQLDatabaseTypes.js";
@@ -20,7 +20,7 @@ export class SQLChart extends BaseChart {
     render(): void {
         if (this.data !== undefined) {
             if (this.chart === undefined) {
-                this.chart = new ChartJs(
+                this.chart = new Chart(
                     this.ctx,
                     {
                         type: "line",

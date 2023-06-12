@@ -1,5 +1,5 @@
 import { BaseChart } from "./BaseChart.js";
-import { Chart as ChartJs } from "../lib/chart.js/dist/types/index.js"
+import { Chart } from "../lib/chart.js/dist/types/index.js"
 import type { CSVChartDiscriptor } from "../types/ChartDescriptors.js";
 import type { CSVData } from "../types/CSVDataType.js";
 
@@ -20,8 +20,10 @@ export class CSVChart extends BaseChart {
             this.xhr.addEventListener("load", () => {
                 if (this.xhr.readyState === this.xhr.DONE) {
                     if (this.xhr.status === 200) {
-                        const res = JSON.parse(this.xhr.responseText);
+                        const res = JSON.parse(this.xhr.responseText) as string[];
+                        console.log(res);
                         this.data = res.map((value: string) => parseInt(value)) as CSVData;
+                        console.log(this.data)
                     } else {
                         this.fetchData(tryNum++);
                     }
@@ -37,7 +39,7 @@ export class CSVChart extends BaseChart {
     render(): void {
         if (this.data !== undefined) {
             if (this.chart === undefined) {
-                this.chart = new ChartJs(
+                this.chart = new Chart(
                     this.ctx,
                     {
                         type: "line",
@@ -45,11 +47,8 @@ export class CSVChart extends BaseChart {
                             scales: {
                                 x: {
                                     ticks: {
-                                        autoSkip: false,
-                                        maxRotation: 90,
-                                        minRotation: 90,
                                         callback: function (value: string | number, index: number): string {
-                                            return index % 100 === 0 ? `${index} ms` : "";
+                                            return `${index} ms`;
                                         }
                                     }
                                 }
